@@ -50,7 +50,11 @@ namespace SOAP_REST_CLIENT
                     }
                 } else if (line == "exit")
                 {
+<<<<<<< HEAD
                     Console.WriteLine("exiting the application...");
+=======
+                    Console.WriteLine("exiting...");
+>>>>>>> a822c60fc41cd425bb6ea3eae68289e811e81d35
                     break;
                 }
                 else
