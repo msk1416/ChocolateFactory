@@ -11,7 +11,7 @@ namespace SOAP_REST_CLIENT
         static void Main(string[] args)
         {
             ServiceReference.ServiceClient client = new ServiceReference.ServiceClient();
-            
+
             string line;
             Console.WriteLine("Insert an option\n1 - show available chocolates\n2 - insert new chocolate\nexit - finish program");
             Console.Write(">");
@@ -20,11 +20,12 @@ namespace SOAP_REST_CLIENT
                 if (line == "1")
                 {
                     Chocolate[] all = client.GetChocolates();
-                    for (int i=0; i < all.Length; i++)
+                    for (int i = 0; i < all.Length; i++)
                     {
                         Console.WriteLine("id " + all[i].ChocId + ": " + all[i].ChocName + "(" + all[i].ChocType + ") - " + all[i].ChocQuant + " unit(s) - Price: EUR " + all[i].ChocPrice + ";, Cost: EUR " + all[i].ChocCost);
                     }
-                } else if (line == "2")
+                }
+                else if (line == "2")
                 {
                     Chocolate newChoc = new Chocolate();
                     Console.Write("Name of the chocolate: ");
@@ -41,20 +42,18 @@ namespace SOAP_REST_CLIENT
                     newChoc.ChocPrice = Int32.Parse(tmp.Split()[0]);
                     newChoc.ChocCost = Int32.Parse(tmp.Split()[1]);
 
-                    if (client.newChocolate(newChoc.ChocName, newChoc.ChocType, newChoc.ChocQuant, newChoc.ChocPrice, newChoc.ChocCost)) 
+                    if (client.newChocolate(newChoc.ChocName, newChoc.ChocType, newChoc.ChocQuant, newChoc.ChocPrice, newChoc.ChocCost))
                     {
                         Console.WriteLine("Chocolate with name " + newChoc.ChocName + " was inserted successfully.");
-                    } else
+                    }
+                    else
                     {
                         Console.WriteLine("Unfortunately this chocolate could not be added.");
                     }
-                } else if (line == "exit")
+                }
+                else if (line == "exit")
                 {
-<<<<<<< HEAD
                     Console.WriteLine("exiting the application...");
-=======
-                    Console.WriteLine("exiting...");
->>>>>>> a822c60fc41cd425bb6ea3eae68289e811e81d35
                     break;
                 }
                 else
