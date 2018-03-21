@@ -28,7 +28,7 @@ namespace SOAP_REST_CLIENT
                 {
                     Console.Write("Name of the chocolate: ");
                     string newChoc = Console.ReadLine();
-                    if (client.newChocolate(newChoc.Split()[0]))
+                    if (client.newChocolate(newChoc.Split()[0])) 
                     {
                         Console.WriteLine("Chocolate with name " + newChoc.Split()[0] + " was inserted successfully.");
                     } else
