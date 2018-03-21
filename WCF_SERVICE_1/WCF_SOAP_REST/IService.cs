@@ -35,19 +35,28 @@ namespace WCF_SOAP_REST
             UriTemplate = "/InsertChocolate", 
             ResponseFormat = WebMessageFormat.Xml, 
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        Boolean newChocolate(string name);
+        Boolean newChocolate(string name, string type, int quant, int price, int cost);
     }
 
     public class Chocolate
     {
         [DataMember]
-        public string ChocName { get; set; }
-
-        [DataMember]
         public int ChocId { get; set; }
 
         [DataMember]
+        public string ChocName { get; set; }
+
+        [DataMember]
+        public string ChocType { get; set; }
+
+        [DataMember]
         public int ChocQuant { get; set; }
+
+        [DataMember]
+        public int ChocPrice { get; set; }
+
+        [DataMember]
+        public int ChocCost { get; set; }
     }
 
     [DataContract]

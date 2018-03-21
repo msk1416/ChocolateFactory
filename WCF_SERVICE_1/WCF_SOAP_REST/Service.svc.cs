@@ -50,7 +50,7 @@ namespace WCF_SOAP_REST
         {
             //TODO: connect to database and retrieve chocolates
             string connectionString = null;
-            connectionString = "Data Source=localhost;Initial Catalog=company;User ID=sergi;Password=admin";
+            connectionString = "Data Source=localhost;Initial Catalog=ChocolateCo.;User ID=sergi;Password=admin";
             SqlConnection cnn;
             cnn = new SqlConnection(connectionString);
             Chocolate[] ret = null;
@@ -58,7 +58,7 @@ namespace WCF_SOAP_REST
             try
             {
                 Console.Out.WriteLine("Connection Opened!");
-                SqlCommand cmd = new SqlCommand("select * from dbo.chocolates;  ", cnn);
+                SqlCommand cmd = new SqlCommand("select * from dbo.Products;  ", cnn);
                 SqlDataReader reader;
                 DataRow row;
                 DataTable table = new DataTable();
@@ -79,9 +79,12 @@ namespace WCF_SOAP_REST
                     row.ItemArray = new object[reader.FieldCount-1];
 
                     Chocolate c = new Chocolate();
-                    c.ChocName = reader.GetString(0);
-                    c.ChocId = (int)reader.GetInt32(1);
-                    c.ChocQuant = (int)reader.GetInt32(2);
+                    c.ChocId = (int)reader.GetInt32(0);
+                    c.ChocName = reader.GetString(1);
+                    c.ChocType = reader.GetString(2);
+                    c.ChocQuant = (int)reader.GetInt32(3);
+                    c.ChocPrice = (int)reader.GetInt32(4);
+                    c.ChocCost = (int)reader.GetInt32(5);
                     list.Add(c);
                 }
                 cnn.Close();
@@ -93,17 +96,24 @@ namespace WCF_SOAP_REST
             return list.ToArray();
         }
       
-        public bool newChocolate(string name)
+        public bool newChocolate(string name, string type, int quant, int price, int cost)
         {
             string connectionString = null;
-            connectionString = "Data Source=localhost;Initial Catalog=company;User ID=sergi;Password=admin";
+            connectionString = "Data Source=localhost;Initial Catalog=ChocolateCo.;User ID=sergi;Password=admin";
             SqlConnection cnn;
             cnn = new SqlConnection(connectionString);
 
             try
             {
+                string sqlQuery = "insert into dbo.Products (" +
+                    "Name, " +
+                    "Type, " +
+                    "Quantity, " +
+                    "Price, " +
+                    "Cost" +
+                    ") values('" + name + "', '" + type + "', " + quant + ", " + price + ", " + cost + ");";
                 Console.Out.WriteLine("Connection Opened!");
-                SqlCommand cmd = new SqlCommand("INSERT INTO dbo.chocolates(name) VALUES ('" + name + "');  ", cnn);
+                SqlCommand cmd = new SqlCommand(sqlQuery, cnn);
                 SqlDataReader reader;
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cnn;
@@ -112,9 +122,10 @@ namespace WCF_SOAP_REST
                 return (reader.RecordsAffected > 0);
             } catch (Exception e)
             {
-                Console.WriteLine("Connection failed to open.");
+                Console.WriteLine("Connection failed to open or the product could not be inserted.");
                 return false;
             }
         }
+        
     }
 }

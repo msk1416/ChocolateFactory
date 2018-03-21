@@ -29,9 +29,12 @@
   <xs:element name="ArrayOfChocolate" nillable="true" type="tns:ArrayOfChocolate" />
   <xs:complexType name="Chocolate">
     <xs:sequence>
+      <xs:element minOccurs="0" name="ChocCost" type="xs:int" />
       <xs:element minOccurs="0" name="ChocId" type="xs:int" />
       <xs:element minOccurs="0" name="ChocName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChocPrice" type="xs:int" />
       <xs:element minOccurs="0" name="ChocQuant" type="xs:int" />
+      <xs:element minOccurs="0" name="ChocType" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Chocolate" nillable="true" type="tns:Chocolate" />

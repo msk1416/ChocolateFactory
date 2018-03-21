@@ -161,13 +161,22 @@ namespace SOAP_REST_CLIENT.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ChocCostField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ChocIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ChocNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ChocPriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ChocQuantField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ChocTypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -176,6 +185,19 @@ namespace SOAP_REST_CLIENT.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ChocCost {
+            get {
+                return this.ChocCostField;
+            }
+            set {
+                if ((this.ChocCostField.Equals(value) != true)) {
+                    this.ChocCostField = value;
+                    this.RaisePropertyChanged("ChocCost");
+                }
             }
         }
         
@@ -206,6 +228,19 @@ namespace SOAP_REST_CLIENT.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ChocPrice {
+            get {
+                return this.ChocPriceField;
+            }
+            set {
+                if ((this.ChocPriceField.Equals(value) != true)) {
+                    this.ChocPriceField = value;
+                    this.RaisePropertyChanged("ChocPrice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int ChocQuant {
             get {
                 return this.ChocQuantField;
@@ -218,6 +253,19 @@ namespace SOAP_REST_CLIENT.ServiceReference {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ChocType {
+            get {
+                return this.ChocTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ChocTypeField, value) != true)) {
+                    this.ChocTypeField = value;
+                    this.RaisePropertyChanged("ChocType");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -225,6 +273,11 @@ namespace SOAP_REST_CLIENT.ServiceReference {
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public static implicit operator string(Chocolate v)
+        {
+            throw new NotImplementedException();
         }
     }
     
@@ -245,7 +298,7 @@ namespace SOAP_REST_CLIENT.ServiceReference {
         SOAP_REST_CLIENT.ServiceReference.Chocolate[] GetChocolates();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/newChocolate", ReplyAction="http://tempuri.org/IService/newChocolateResponse")]
-        bool newChocolate(string name);
+        bool newChocolate(string name, string type, int quant, int price, int cost);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -291,8 +344,8 @@ namespace SOAP_REST_CLIENT.ServiceReference {
             return base.Channel.GetChocolates();
         }
         
-        public bool newChocolate(string name) {
-            return base.Channel.newChocolate(name);
+        public bool newChocolate(string name, string type, int quant, int price, int cost) {
+            return base.Channel.newChocolate(name, type, quant, price, cost);
         }
     }
 }
