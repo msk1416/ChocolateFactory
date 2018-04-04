@@ -25,6 +25,9 @@ namespace ProductService
             BodyStyle = WebMessageBodyStyle.Wrapped)]
         Boolean newProduct(int _id, string _name, string _type, int _quant, int _price, int _cost);
 
+        [OperationContract]
+        bool updateProduct(int _id, int _quant, int _price, int _cost);
+
         /*
         // TODO: Add your service operations here
         [OperationContract]

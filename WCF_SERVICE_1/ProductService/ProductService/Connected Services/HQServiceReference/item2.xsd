@@ -48,4 +48,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CheckUpdateProductIsDone">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="_id" type="xs:int" />
+        <xs:element minOccurs="0" name="new_quant" type="xs:int" />
+        <xs:element minOccurs="0" name="new_price" type="xs:int" />
+        <xs:element minOccurs="0" name="new_cost" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckUpdateProductIsDoneResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckUpdateProductIsDoneResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

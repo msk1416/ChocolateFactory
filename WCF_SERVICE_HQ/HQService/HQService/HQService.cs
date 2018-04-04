@@ -27,6 +27,23 @@ namespace HQService
             }
         }
 
+        public bool CheckUpdateProductIsDone(int _id, int new_quant, int new_price, int new_cost)
+        {
+
+            using (var ctx = new ChocolateCoHQEntities())
+            {
+                var productToUpdate = (from p
+                                    in ctx.ProductEntities
+                                     where p.ProductID == _id
+                                     select p).FirstOrDefault();
+                if (new_quant >= 0) productToUpdate.Quantity = new_quant;
+                if (new_price >= 0) productToUpdate.Price = new_price;
+                if (new_cost >= 0) productToUpdate.Cost = new_cost;
+                var res = ctx.SaveChanges();
+                return (res > 0);
+            }
+        }
+
         public string GetData(int value)
         {
             return string.Format("You entered: {0}", value);

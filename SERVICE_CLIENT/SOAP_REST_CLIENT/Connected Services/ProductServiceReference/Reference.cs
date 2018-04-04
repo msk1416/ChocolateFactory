@@ -150,6 +150,9 @@ namespace SOAP_REST_CLIENT.ProductServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/newProduct", ReplyAction="http://tempuri.org/IProductService/newProductResponse")]
         bool newProduct(int _id, string _name, string _type, int _quant, int _price, int _cost);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/updateProduct", ReplyAction="http://tempuri.org/IProductService/updateProductResponse")]
+        bool updateProduct(int _id, int _quant, int _price, int _cost);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -189,6 +192,10 @@ namespace SOAP_REST_CLIENT.ProductServiceReference {
         
         public bool newProduct(int _id, string _name, string _type, int _quant, int _price, int _cost) {
             return base.Channel.newProduct(_id, _name, _type, _quant, _price, _cost);
+        }
+        
+        public bool updateProduct(int _id, int _quant, int _price, int _cost) {
+            return base.Channel.updateProduct(_id, _quant, _price, _cost);
         }
     }
 }

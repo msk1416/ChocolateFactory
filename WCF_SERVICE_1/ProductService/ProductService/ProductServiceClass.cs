@@ -83,5 +83,28 @@ namespace ProductService
             }
             
         }
+
+        public bool updateProduct(int _id, int _quant, int _price, int _cost)
+        {
+            HQServiceReference.HQServiceClient client = new HQServiceReference.HQServiceClient();
+            if (client.CheckUpdateProductIsDone(_id, _quant, _price, _cost))
+            {
+                using (var ctx = new ChocolateStoreUkEntities())
+                {
+                    var productToUpdate = (from p
+                                        in ctx.ProductEntities
+                                           where p.ProductID == _id
+                                           select p).FirstOrDefault();
+                    if (_quant >= 0) productToUpdate.Quantity = _quant;
+                    if (_price >= 0) productToUpdate.Price = _price;
+                    if (_cost >= 0)  productToUpdate.Cost = _cost;
+                    var res = ctx.SaveChanges();
+                    return (res > 0);
+                }
+            } else
+            {
+                return false;
+            }
+        }
     }
 }

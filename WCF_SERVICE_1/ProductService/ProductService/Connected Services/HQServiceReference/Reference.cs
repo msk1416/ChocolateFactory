@@ -86,6 +86,9 @@ namespace ProductService.HQServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHQService/CheckInsertIsDone", ReplyAction="http://tempuri.org/IHQService/CheckInsertIsDoneResponse")]
         bool CheckInsertIsDone(int _id, string _name, string _type, int _quant, int _price, int _cost);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHQService/CheckUpdateProductIsDone", ReplyAction="http://tempuri.org/IHQService/CheckUpdateProductIsDoneResponse")]
+        bool CheckUpdateProductIsDone(int _id, int new_quant, int new_price, int new_cost);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -125,6 +128,10 @@ namespace ProductService.HQServiceReference {
         
         public bool CheckInsertIsDone(int _id, string _name, string _type, int _quant, int _price, int _cost) {
             return base.Channel.CheckInsertIsDone(_id, _name, _type, _quant, _price, _cost);
+        }
+        
+        public bool CheckUpdateProductIsDone(int _id, int new_quant, int new_price, int new_cost) {
+            return base.Channel.CheckUpdateProductIsDone(_id, new_quant, new_price, new_cost);
         }
     }
 }

@@ -19,6 +19,9 @@ namespace HQService
 
         [OperationContract]
         bool CheckInsertIsDone(int _id, string _name, string _type, int _quant, int _price, int _cost);
+
+        [OperationContract]
+        bool CheckUpdateProductIsDone(int _id, int new_quant, int new_price, int new_cost);
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

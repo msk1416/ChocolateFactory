@@ -25,6 +25,12 @@
   <wsdl:message name="IHQService_CheckInsertIsDone_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckInsertIsDoneResponse" />
   </wsdl:message>
+  <wsdl:message name="IHQService_CheckUpdateProductIsDone_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckUpdateProductIsDone" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_CheckUpdateProductIsDone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckUpdateProductIsDoneResponse" />
+  </wsdl:message>
   <wsdl:portType name="IHQService">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IHQService/GetData" message="tns:IHQService_GetData_InputMessage" />
@@ -37,6 +43,10 @@
     <wsdl:operation name="CheckInsertIsDone">
       <wsdl:input wsaw:Action="http://tempuri.org/IHQService/CheckInsertIsDone" message="tns:IHQService_CheckInsertIsDone_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IHQService/CheckInsertIsDoneResponse" message="tns:IHQService_CheckInsertIsDone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUpdateProductIsDone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/CheckUpdateProductIsDone" message="tns:IHQService_CheckUpdateProductIsDone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/CheckUpdateProductIsDoneResponse" message="tns:IHQService_CheckUpdateProductIsDone_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IHQService" type="tns:IHQService">
@@ -61,6 +71,15 @@
     </wsdl:operation>
     <wsdl:operation name="CheckInsertIsDone">
       <soap:operation soapAction="http://tempuri.org/IHQService/CheckInsertIsDone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUpdateProductIsDone">
+      <soap:operation soapAction="http://tempuri.org/IHQService/CheckUpdateProductIsDone" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
