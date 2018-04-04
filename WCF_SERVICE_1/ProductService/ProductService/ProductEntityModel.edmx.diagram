@@ -6,10 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9499d151a69745aca0fa942889f0259c" Name="Diagram1">
         <EntityTypeShape EntityType="ChocolateStoreUkModel.Client" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateStoreUkModel.Employee" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChocolateStoreUkModel.Employee" Width="1.5" PointX="5.875" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ChocolateStoreUkModel.Order" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateStoreUkModel.ProductEntity" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateStoreUkModel.Shipper" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChocolateStoreUkModel.ProductEntity" Width="1.5" PointX="3.625" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChocolateStoreUkModel.Shipper" Width="1.5" PointX="0.625" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ChocolateStoreUkModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="ChocolateStoreUkModel.FK_Orders_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="ChocolateStoreUkModel.FK_Orders_Employees" ManuallyRouted="false" />

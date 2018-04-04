@@ -27,16 +27,7 @@ namespace ProductService
 
         [OperationContract]
         bool updateProduct(int _id, int _quant, int _price, int _cost);
-
-        /*
-        // TODO: Add your service operations here
-        [OperationContract]
-        [WebInvoke(Method = "POST",
-            UriTemplate = "/InsertChocolate",
-            ResponseFormat = WebMessageFormat.Xml,
-            BodyStyle = WebMessageBodyStyle.Wrapped)]
-        Boolean newChocolate(string name, string type, int quant, int price, int cost);
-        */
+        
     }
 
     public class Chocolate
