@@ -13,10 +13,10 @@ namespace ProductService
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ChocolateCoEntities : DbContext
+    public partial class ChocolateStoreUkEntities : DbContext
     {
-        public ChocolateCoEntities()
-            : base("name=ChocolateCoEntities")
+        public ChocolateStoreUkEntities()
+            : base("name=ChocolateStoreUkEntities")
         {
         }
     
@@ -30,5 +30,6 @@ namespace ProductService
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<ProductEntity> ProductEntities { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

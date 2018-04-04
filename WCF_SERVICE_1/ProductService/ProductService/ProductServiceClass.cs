@@ -10,11 +10,11 @@ using System.Text;
 namespace ProductService
 {
     //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
-    public class ProductService : IProductService
+    public class ProductServiceClass : IProductService
     {
         public Product GetProduct(int p_id)
         {
-            ChocolateCoEntities context = new ChocolateCoEntities();
+            ChocolateStoreUkEntities context = new ChocolateStoreUkEntities();
             var productEntity = (from p
                                  in context.ProductEntities
                                  where p.ProductID == p_id
@@ -43,7 +43,7 @@ namespace ProductService
 
         public Product[] GetProducts()
         {
-            using (var ctx = new ChocolateCoEntities())
+            using (var ctx = new ChocolateStoreUkEntities())
             {
                 var productEntities = (from p
                                         in ctx.ProductEntities
@@ -67,7 +67,7 @@ namespace ProductService
             new_p.Quantity = _quant;
             new_p.Price = _price;
             new_p.Cost = _cost;
-            using (var ctx = new ChocolateCoEntities())
+            using (var ctx = new ChocolateStoreUkEntities())
             {
                 var res = ctx.ProductEntities.Add(new_p);
                 ctx.SaveChanges();
