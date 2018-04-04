@@ -59,20 +59,29 @@ namespace ProductService
                 
         }
 
-        public bool newProduct(string _name, string _type, int _quant, int _price, int _cost)
+        public bool newProduct(int _id, string _name, string _type, int _quant, int _price, int _cost)
         {
-            ProductEntity new_p = new ProductEntity();
-            new_p.Name = _name;
-            new_p.Type = _type;
-            new_p.Quantity = _quant;
-            new_p.Price = _price;
-            new_p.Cost = _cost;
-            using (var ctx = new ChocolateStoreUkEntities())
+            HQServiceReference.HQServiceClient client = new HQServiceReference.HQServiceClient();
+            if (client.CheckInsertIsDone(_id, _name, _type, _quant, _price, _cost))
             {
-                var res = ctx.ProductEntities.Add(new_p);
-                ctx.SaveChanges();
-                return (res != null);
+                ProductEntity new_p = new ProductEntity();
+                new_p.ProductID = _id;
+                new_p.Name = _name;
+                new_p.Type = _type;
+                new_p.Quantity = _quant;
+                new_p.Price = _price;
+                new_p.Cost = _cost;
+                using (var ctx = new ChocolateStoreUkEntities())
+                {
+                    var res = ctx.ProductEntities.Add(new_p);
+                    ctx.SaveChanges();
+                    return (res != null);
+                }
+            } else
+            {
+                return false;
             }
+            
         }
     }
 }

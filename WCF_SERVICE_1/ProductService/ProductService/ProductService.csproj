@@ -56,6 +56,11 @@
     <Compile Include="Client.cs">
       <DependentUpon>ProductEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\HQServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>ProductEntityModel.tt</DependentUpon>
     </Compile>
@@ -94,6 +99,19 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\HQServiceReference\HQService.wsdl" />
+    <None Include="Connected Services\HQServiceReference\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\HQServiceReference\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\HQServiceReference\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\HQServiceReference\ProductService.HQServiceReference.CompositeType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <EntityDeploy Include="ProductEntityModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -107,6 +125,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\HQServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\HQServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\HQServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\HQServiceReference\item.disco" />
     <Content Include="ProductEntityModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ProductEntityModel.edmx</DependentUpon>
@@ -117,6 +142,12 @@
       <DependentUpon>ProductEntityModel.edmx</DependentUpon>
       <LastGenOutput>ProductEntityModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\HQServiceReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

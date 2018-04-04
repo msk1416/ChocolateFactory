@@ -1,33 +1,35 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/ProductService" />
-  <xs:element name="GetProduct">
+  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/HQService/HQService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/HQService" />
+  <xs:element name="GetData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="p_id" type="xs:int" />
+        <xs:element minOccurs="0" name="value" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetProductResponse">
+  <xs:element name="GetDataResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ProductService" minOccurs="0" name="GetProductResult" nillable="true" type="q1:Product" />
+        <xs:element minOccurs="0" name="GetDataResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetProducts">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetProductsResponse">
+  <xs:element name="GetDataUsingDataContract">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ProductService" minOccurs="0" name="GetProductsResult" nillable="true" type="q2:ArrayOfProduct" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/HQService" minOccurs="0" name="composite" nillable="true" type="q1:CompositeType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="newProduct">
+  <xs:element name="GetDataUsingDataContractResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/HQService" minOccurs="0" name="GetDataUsingDataContractResult" nillable="true" type="q2:CompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckInsertIsDone">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="_id" type="xs:int" />
@@ -39,10 +41,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="newProductResponse">
+  <xs:element name="CheckInsertIsDoneResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="newProductResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="CheckInsertIsDoneResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

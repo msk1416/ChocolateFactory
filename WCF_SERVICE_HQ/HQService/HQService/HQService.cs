@@ -10,9 +10,10 @@ namespace HQService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class HQService : IHQService
     {
-        public bool CheckInsertIsDone(string _name, string _type, int _quant, int _price, int _cost)
+        public bool CheckInsertIsDone(int _id, string _name, string _type, int _quant, int _price, int _cost)
         {
             ProductEntity new_p = new ProductEntity();
+            new_p.ProductID = _id;
             new_p.Name = _name;
             new_p.Type = _type;
             new_p.Quantity = _quant;

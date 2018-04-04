@@ -40,6 +40,10 @@ namespace SOAP_REST_CLIENT
                 else if (line == "2")
                 {
                     Product newProd = new Product();
+                    Console.Write("Insert unique Id: ");
+                    newProd.ID = Int32.Parse(Console.ReadLine().Split()[0]);
+
+                    
                     Console.Write("Name of the product: ");
                     newProd.Name = Console.ReadLine().Split()[0].Trim();
 
@@ -54,7 +58,7 @@ namespace SOAP_REST_CLIENT
                     newProd.Price = Int32.Parse(tmp.Split()[0]);
                     newProd.Cost = Int32.Parse(tmp.Split()[1]);
 
-                    if (client.newProduct(newProd.Name, newProd.Type, newProd.Quantity, newProd.Price, newProd.Cost))
+                    if (client.newProduct(newProd.ID, newProd.Name, newProd.Type, newProd.Quantity, newProd.Price, newProd.Cost))
                     {
                         Console.WriteLine("Chocolate with name " + newProd.Name + " was inserted successfully.");
                     }

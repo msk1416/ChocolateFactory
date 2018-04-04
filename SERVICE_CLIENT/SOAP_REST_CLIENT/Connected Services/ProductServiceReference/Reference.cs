@@ -149,7 +149,7 @@ namespace SOAP_REST_CLIENT.ProductServiceReference {
         SOAP_REST_CLIENT.ProductServiceReference.Product[] GetProducts();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/newProduct", ReplyAction="http://tempuri.org/IProductService/newProductResponse")]
-        bool newProduct(string _name, string _type, int _quant, int _price, int _cost);
+        bool newProduct(int _id, string _name, string _type, int _quant, int _price, int _cost);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -187,8 +187,8 @@ namespace SOAP_REST_CLIENT.ProductServiceReference {
             return base.Channel.GetProducts();
         }
         
-        public bool newProduct(string _name, string _type, int _quant, int _price, int _cost) {
-            return base.Channel.newProduct(_name, _type, _quant, _price, _cost);
+        public bool newProduct(int _id, string _name, string _type, int _quant, int _price, int _cost) {
+            return base.Channel.newProduct(_id, _name, _type, _quant, _price, _cost);
         }
     }
 }

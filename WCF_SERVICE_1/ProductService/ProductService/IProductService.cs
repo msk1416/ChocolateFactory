@@ -23,7 +23,7 @@ namespace ProductService
             UriTemplate = "/InsertProduct",
             ResponseFormat = WebMessageFormat.Xml,
             BodyStyle = WebMessageBodyStyle.Wrapped)]
-        Boolean newProduct(string _name, string _type, int _quant, int _price, int _cost);
+        Boolean newProduct(int _id, string _name, string _type, int _quant, int _price, int _cost);
 
         /*
         // TODO: Add your service operations here

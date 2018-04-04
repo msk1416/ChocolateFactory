@@ -18,7 +18,7 @@ namespace HQService
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         [OperationContract]
-        bool CheckInsertIsDone(string _name, string _type, int _quant, int _price, int _cost);
+        bool CheckInsertIsDone(int _id, string _name, string _type, int _quant, int _price, int _cost);
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
