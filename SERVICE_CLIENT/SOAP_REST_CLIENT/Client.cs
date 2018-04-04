@@ -11,7 +11,6 @@ namespace SOAP_REST_CLIENT
     {
         static void Main(string[] args)
         {
-            //ServiceReference.ServiceClient client = new ServiceReference.ServiceClient();
             ProductServiceReference.ProductServiceClient client = 
                 new ProductServiceReference.ProductServiceClient();
             string line;
@@ -21,11 +20,6 @@ namespace SOAP_REST_CLIENT
             {
                 if (line == "1")
                 {
-                    //Chocolate[] all = client.GetChocolates();
-                    //for (int i = 0; i < all.Length; i++)
-                    //{
-                    //    Console.WriteLine("id " + all[i].ChocId + ": " + all[i].ChocName + " (" + all[i].ChocType + ") - " + all[i].ChocQuant + " unit(s) - Price: EUR " + all[i].ChocPrice + ";, Cost: EUR " + all[i].ChocCost);
-                    //}
                     ProductServiceReference.Product[] all = client.GetProducts();
                     for (int i = 0; i < all.Length; i++)
                     {
