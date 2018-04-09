@@ -1,4 +1,4 @@
-﻿using SOAP_REST_CLIENT.ServiceReference;
+﻿
 using SOAP_REST_CLIENT.ProductServiceReference;
 using System;
 using System.Collections.Generic;
