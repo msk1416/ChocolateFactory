@@ -13,18 +13,19 @@ Begin
 
 	if @quantity > (select Quantity from Products where ProductID = @productID) 
 		print 'Current order can''t be accepted as there is not enough stock. Make an order to the HQ and then you''ll be able to confirm this order.';
-	else begin;
-		INSERT INTO Orders 
-		SELECT *
-		FROM [PendingOrders]
-		WHERE @orderId=[PendingOrders].OrderID;
+	else 
+		begin;
+			INSERT INTO Orders 
+			SELECT *
+			FROM [PendingOrders]
+			WHERE @orderId=[PendingOrders].OrderID;
 
-		delete from PendingOrders
-		where OrderID=@orderId
-		update Products 
-		set Quantity = Quantity - @Quantity
-		where ProductID = @productID;
-	end;
+			delete from PendingOrders
+			where OrderID=@orderId
+			update Products 
+			set Quantity = Quantity - @Quantity
+			where ProductID = @productID;
+		end;
 End
 
 
@@ -34,7 +35,6 @@ CREATE procedure [dbo].[spCreatePendingOrder]
 (
 	
 	@ClientID as int,
-    @EmployeeID as int,
     @ProductID as int,
     @Quantity as int,
     @Date as date,
@@ -58,8 +58,10 @@ Begin
 		select @IdPending = (MAX(OrderID)+1 )
 		from PendingOrders
 
-		INSERT INTO PendingOrders (OrderID, ClientID, EmployeeID, ProductID,Quantity,Date,ShipperID)
-		VALUES (dbo.InlineMax(@Id, @IdPending), @ClientID, @EmployeeID,@ProductID,@Quantity,@Date,@ShipperID);
+		INSERT INTO PendingOrders (OrderID, ClientID, ProductID,Quantity,Date,ShipperID)
+		VALUES (dbo.InlineMax(@Id, @IdPending), @ClientID,@ProductID,@Quantity,@Date,@ShipperID);
+		
+		return dbo.InlineMax(@Id, @IdPending);
 		end;
 End
 
@@ -85,14 +87,6 @@ INSERT [dbo].[Clients] ([ClientID], [City], [Name], [PreferedFormat]) VALUES (3,
 INSERT [dbo].[Clients] ([ClientID], [City], [Name], [PreferedFormat]) VALUES (4, N'Warszawa', N'Blikle', N'Solid')
 INSERT [dbo].[Clients] ([ClientID], [City], [Name], [PreferedFormat]) VALUES (5, N'Łódź', N'Piekarenka', N'Solid')
 INSERT [dbo].[Clients] ([ClientID], [City], [Name], [PreferedFormat]) VALUES (6, N'Kraków', N'ChocoWorld', N'Liquid')
-INSERT [dbo].[Employees] ([EmployeeID], [FirstName], [LastName], [Age], [Position], [Salary], [DateOfHire]) VALUES (1, N'Roman     ', N'Wacha     ', 31, N'KeyAccount', 8000, CAST(N'2000-01-01' AS Date))
-INSERT [dbo].[Employees] ([EmployeeID], [FirstName], [LastName], [Age], [Position], [Salary], [DateOfHire]) VALUES (2, N'Janusz    ', N'Nosacz    ', 24, N'Sales Rep ', 3500, CAST(N'2005-04-05' AS Date))
-INSERT [dbo].[Employees] ([EmployeeID], [FirstName], [LastName], [Age], [Position], [Salary], [DateOfHire]) VALUES (3, N'Grażyna   ', N'Nosek     ', 38, N'Accountant', 19000, CAST(N'2007-01-09' AS Date))
-INSERT [dbo].[Employees] ([EmployeeID], [FirstName], [LastName], [Age], [Position], [Salary], [DateOfHire]) VALUES (4, N'Wiesław   ', N'Bąk       ', 45, N'Sales Rep ', 3800, CAST(N'2001-05-19' AS Date))
-INSERT [dbo].[Employees] ([EmployeeID], [FirstName], [LastName], [Age], [Position], [Salary], [DateOfHire]) VALUES (5, N'Sławomir  ', N'Ryba      ', 37, N'Logistics ', 3500, CAST(N'2003-06-10' AS Date))
-INSERT [dbo].[Employees] ([EmployeeID], [FirstName], [LastName], [Age], [Position], [Salary], [DateOfHire]) VALUES (6, N'Adam      ', N'Wąski     ', 32, N'IT        ', 3200, CAST(N'2012-03-01' AS Date))
-INSERT [dbo].[Employees] ([EmployeeID], [FirstName], [LastName], [Age], [Position], [Salary], [DateOfHire]) VALUES (7, N'Sebastian ', N'Łysiewicz ', 52, N'Lawyer    ', 8000, CAST(N'2017-08-08' AS Date))
-INSERT [dbo].[Employees] ([EmployeeID], [FirstName], [LastName], [Age], [Position], [Salary], [DateOfHire]) VALUES (8, N'Krystyna  ', N'Wąs       ', 62, N'Logistics ', 3000, CAST(N'2017-11-26' AS Date))
 INSERT [dbo].[Orders] ([OrderID], [ClientID], [EmployeeID], [ProductID], [Quantity], [Date], [ShipperID]) VALUES (1, 2, 2, 3, 500, CAST(N'2016-12-21' AS Date), 1)
 INSERT [dbo].[Orders] ([OrderID], [ClientID], [EmployeeID], [ProductID], [Quantity], [Date], [ShipperID]) VALUES (2, 3, 4, 2, 270, CAST(N'2016-11-11' AS Date), 3)
 INSERT [dbo].[Orders] ([OrderID], [ClientID], [EmployeeID], [ProductID], [Quantity], [Date], [ShipperID]) VALUES (3, 1, 2, 1, 1000, CAST(N'2017-11-11' AS Date), 2)
@@ -143,7 +137,6 @@ GO
 CREATE TABLE [dbo].[PendingOrders](
 	[OrderID] [int] NOT NULL,
 	[ClientID] [int] NOT NULL,
-	[EmployeeID] [int] NOT NULL,
 	[ProductID] [int] NOT NULL,
 	[Quantity] [int] NOT NULL,
 	[Date] [date] NOT NULL,

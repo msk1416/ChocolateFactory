@@ -108,12 +108,16 @@ namespace ProductService
             return false;
         }
 
-        public bool requestOrder(int clientId, int productId, int quantity, string date, int shipperId)
+        public int requestOrder(int clientId, int productId, int quantity, string date, int shipperId)
         {
             using (var ctx = new ChocolateStoreUkEntities2())
             {
                 var result = ctx.spCreatePendingOrder(clientId, productId, quantity, System.DateTime.Parse(date), shipperId);
-                return (result > 0);
+                if (result > 0)
+                {
+                    var orderId = ctx.PendingOrders.Max(p => p.OrderID);
+                    return orderId;
+                } else return -1;
             }
         }
 

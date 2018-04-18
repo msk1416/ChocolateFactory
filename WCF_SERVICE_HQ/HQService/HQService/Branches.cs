@@ -7,22 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ProductService
+namespace HQService
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class Branches
     {
-        public int OrderID { get; set; }
-        public int ClientID { get; set; }
-        public int ProductID { get; set; }
-        public int Quantity { get; set; }
-        public System.DateTime Date { get; set; }
-        public int ShipperID { get; set; }
-    
-        public virtual Client Client { get; set; }
-        public virtual Product Product { get; set; }
-        public virtual Shipper Shipper { get; set; }
+        public string name { get; set; }
+        public string location { get; set; }
     }
 }

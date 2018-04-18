@@ -29,7 +29,10 @@ namespace ProductService
         bool updateProduct(int _id, int _quant, int _price, int _cost);
 
         [OperationContract]
-        bool requestOrder(int clientId, int productId, int quantity, String date, int shipperId);
+        int requestOrder(int clientId, int productId, int quantity, String date, int shipperId);
+
+        [OperationContract]
+        bool acceptOrder(int orderId);
     }
 
     public class Chocolate

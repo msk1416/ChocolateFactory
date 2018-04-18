@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ChocolateStoreUkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ChocolateStoreUkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ClientID" />
@@ -20,22 +20,14 @@
           </Key>
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="ClientID" Type="int" Nullable="false" />
-          <Property Name="EmployeeID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="ShipperID" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ChocolateStoreUk.dbo.PendingOrders' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PendingOrders">
           <Key>
             <PropertyRef Name="OrderID" />
-            <PropertyRef Name="ClientID" />
-            <PropertyRef Name="ProductID" />
-            <PropertyRef Name="Quantity" />
-            <PropertyRef Name="Date" />
-            <PropertyRef Name="ShipperID" />
           </Key>
           <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="ClientID" Type="int" Nullable="false" />
@@ -113,18 +105,9 @@ warning 6002: The table/view 'ChocolateStoreUk.dbo.PendingOrders' does not have 
         <EntityContainer Name="ChocolateStoreUkModelStoreContainer">
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PendingOrders" EntityType="Self.PendingOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shippers" EntityType="Self.Shippers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PendingOrders" EntityType="Self.PendingOrders" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PendingOrders].[OrderID] AS [OrderID], 
-    [PendingOrders].[ClientID] AS [ClientID], 
-    [PendingOrders].[ProductID] AS [ProductID], 
-    [PendingOrders].[Quantity] AS [Quantity], 
-    [PendingOrders].[Date] AS [Date], 
-    [PendingOrders].[ShipperID] AS [ShipperID]
-    FROM [dbo].[PendingOrders] AS [PendingOrders]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Orders_Clients" Association="Self.FK_Orders_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Orders" EntitySet="Orders" />
@@ -138,8 +121,7 @@ warning 6002: The table/view 'ChocolateStoreUk.dbo.PendingOrders' does not have 
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ChocolateStoreUkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -159,7 +141,6 @@ warning 6002: The table/view 'ChocolateStoreUk.dbo.PendingOrders' does not have 
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="ClientID" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
@@ -193,11 +174,6 @@ warning 6002: The table/view 'ChocolateStoreUk.dbo.PendingOrders' does not have 
         <EntityType Name="PendingOrder">
           <Key>
             <PropertyRef Name="OrderID" />
-            <PropertyRef Name="ClientID" />
-            <PropertyRef Name="ProductID" />
-            <PropertyRef Name="Quantity" />
-            <PropertyRef Name="Date" />
-            <PropertyRef Name="ShipperID" />
           </Key>
           <Property Name="OrderID" Type="Int32" Nullable="false" />
           <Property Name="ClientID" Type="Int32" Nullable="false" />
@@ -261,7 +237,7 @@ warning 6002: The table/view 'ChocolateStoreUk.dbo.PendingOrders' does not have 
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <FunctionImport Name="spConfirmPendingOrder">
-            <Parameter Name="orderId" Mode="In" Type="Int32" />
+          <Parameter Name="orderId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spCreatePendingOrder">
             <Parameter Name="ClientID" Mode="In" Type="Int32" />
@@ -292,7 +268,6 @@ warning 6002: The table/view 'ChocolateStoreUk.dbo.PendingOrders' does not have 
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Date" ColumnName="Date" />

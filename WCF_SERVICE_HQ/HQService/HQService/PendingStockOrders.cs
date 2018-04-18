@@ -12,19 +12,11 @@ namespace HQService
     using System;
     using System.Collections.Generic;
     
-    public partial class Order
+    public partial class PendingStockOrders
     {
         public int OrderID { get; set; }
-        public int ClientID { get; set; }
-        public int EmployeeID { get; set; }
+        public string branch { get; set; }
         public int ProductID { get; set; }
-        public int Quantity { get; set; }
-        public System.DateTime Date { get; set; }
-        public int ShipperID { get; set; }
-    
-        public virtual Client Client { get; set; }
-        public virtual Employee Employee { get; set; }
-        public virtual ProductEntity Product { get; set; }
-        public virtual Shipper Shipper { get; set; }
+        public int QuantityAsked { get; set; }
     }
 }

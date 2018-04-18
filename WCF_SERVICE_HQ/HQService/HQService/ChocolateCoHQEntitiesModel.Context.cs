@@ -13,10 +13,10 @@ namespace HQService
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ChocolateCoHQEntities : DbContext
+    public partial class ChocolateCoHQEntities1 : DbContext
     {
-        public ChocolateCoHQEntities()
-            : base("name=ChocolateCoHQEntities")
+        public ChocolateCoHQEntities1()
+            : base("name=ChocolateCoHQEntities1")
         {
         }
     
@@ -25,11 +25,9 @@ namespace HQService
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<ProductEntity> ProductEntities { get; set; }
-        public virtual DbSet<Shipper> Shippers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Branches> Branches { get; set; }
+        public virtual DbSet<PendingStockOrders> PendingStockOrders { get; set; }
+        public virtual DbSet<ProductStock> ProductStock { get; set; }
+        public virtual DbSet<OrdersLog> OrdersLog { get; set; }
     }
 }
