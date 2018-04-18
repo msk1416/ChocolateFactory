@@ -14,19 +14,6 @@
           <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="PreferedFormat" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
-        <EntityType Name="Employees">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Type="int" Nullable="false" />
-          <Property Name="FirstName" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="LastName" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Age" Type="int" Nullable="false" />
-          <Property Name="Position" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Salary" Type="int" Nullable="false" />
-          <Property Name="Adress" Type="nchar" MaxLength="10" />
-          <Property Name="DateOfHire" Type="date" />
-        </EntityType>
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -39,12 +26,30 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="ShipperID" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ChocolateStoreUk.dbo.PendingOrders' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PendingOrders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="ShipperID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="ShipperID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
-          <Property Name="ProductID" Type="int" StoreGeneratedPattern="None" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Type" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
@@ -59,16 +64,6 @@
           <Property Name="City" Type="nchar" MaxLength="10" />
           <Property Name="CostPerTon" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <Association Name="FK_Orders_Clients">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
@@ -78,18 +73,6 @@
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="ClientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Orders_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="EmployeeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -117,19 +100,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spConfirmPendingOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="orderId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spCreatePendingOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClientID" Type="int" Mode="In" />
+          <Parameter Name="ProductID" Type="int" Mode="In" />
+          <Parameter Name="Quantity" Type="int" Mode="In" />
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="ShipperID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ChocolateStoreUkModelStoreContainer">
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shippers" EntityType="Self.Shippers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PendingOrders" EntityType="Self.PendingOrders" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PendingOrders].[OrderID] AS [OrderID], 
+    [PendingOrders].[ClientID] AS [ClientID], 
+    [PendingOrders].[ProductID] AS [ProductID], 
+    [PendingOrders].[Quantity] AS [Quantity], 
+    [PendingOrders].[Date] AS [Date], 
+    [PendingOrders].[ShipperID] AS [ShipperID]
+    FROM [dbo].[PendingOrders] AS [PendingOrders]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Orders_Clients" Association="Self.FK_Orders_Clients">
             <End Role="Clients" EntitySet="Clients" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
-            <End Role="Employees" EntitySet="Employees" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Products" Association="Self.FK_Orders_Products">
@@ -156,20 +153,6 @@
           <Property Name="PreferedFormat" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Clients" FromRole="Clients" ToRole="Orders" />
         </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="EmployeeID" />
-          </Key>
-          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Age" Type="Int32" Nullable="false" />
-          <Property Name="Position" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Salary" Type="Int32" Nullable="false" />
-          <Property Name="Adress" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="DateOfHire" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Employees" FromRole="Employees" ToRole="Orders" />
-        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -182,16 +165,15 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ShipperID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Orders_Clients" FromRole="Orders" ToRole="Clients" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Orders_Employees" FromRole="Orders" ToRole="Employees" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Orders_Products" FromRole="Orders" ToRole="Products" />
           <NavigationProperty Name="Shipper" Relationship="Self.FK_Orders_Shippers" FromRole="Orders" ToRole="Shippers" />
         </EntityType>
-        <EntityType Name="ProductEntity">
+        <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductID" />
           </Key>
-          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
@@ -208,15 +190,21 @@
           <Property Name="CostPerTon" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Shippers" FromRole="Shippers" ToRole="Orders" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="PendingOrder">
           <Key>
-            <PropertyRef Name="diagram_id" />
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="ProductID" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="ShipperID" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ShipperID" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Orders_Clients">
           <End Role="Clients" Type="Self.Client" Multiplicity="1" />
@@ -230,20 +218,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Orders_Employees">
-          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeID" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="EmployeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Orders_Products">
-          <End Role="Products" Type="ChocolateStoreUkModel.ProductEntity" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
           <End Role="Orders" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
@@ -266,36 +242,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ChocolateStoreUkEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ChocolateStoreUkEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clients" EntityType="Self.Client" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="ProductEntities" EntityType="ChocolateStoreUkModel.ProductEntity" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Shippers" EntityType="Self.Shipper" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="PendingOrders" EntityType="Self.PendingOrder" />
           <AssociationSet Name="FK_Orders_Clients" Association="Self.FK_Orders_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_Orders_Employees" Association="Self.FK_Orders_Employees">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
           <AssociationSet Name="FK_Orders_Products" Association="Self.FK_Orders_Products">
-            <End Role="Products" EntitySet="ProductEntities" />
+            <End Role="Products" EntitySet="Products" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_Shippers" Association="Self.FK_Orders_Shippers">
             <End Role="Shippers" EntitySet="Shippers" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
+          <FunctionImport Name="spConfirmPendingOrder">
+            <Parameter Name="orderId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spCreatePendingOrder">
+            <Parameter Name="ClientID" Mode="In" Type="Int32" />
+            <Parameter Name="ProductID" Mode="In" Type="Int32" />
+            <Parameter Name="Quantity" Mode="In" Type="Int32" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="ShipperID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ChocolateStoreUkModelStoreContainer" CdmEntityContainer="ChocolateStoreUkEntities">
+        <EntityContainerMapping StorageEntityContainer="ChocolateStoreUkModelStoreContainer" CdmEntityContainer="ChocolateStoreUkEntities2">
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="ChocolateStoreUkModel.Client">
               <MappingFragment StoreEntitySet="Clients">
@@ -303,20 +284,6 @@
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="PreferedFormat" ColumnName="PreferedFormat" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="ChocolateStoreUkModel.Employee">
-              <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Salary" ColumnName="Salary" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="DateOfHire" ColumnName="DateOfHire" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -333,11 +300,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductEntities">
-            <EntityTypeMapping TypeName="ChocolateStoreUkModel.ProductEntity">
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ChocolateStoreUkModel.Product">
               <MappingFragment StoreEntitySet="Products">
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -355,17 +322,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ChocolateStoreUkModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+          <EntitySetMapping Name="PendingOrders">
+            <EntityTypeMapping TypeName="ChocolateStoreUkModel.PendingOrder">
+              <MappingFragment StoreEntitySet="PendingOrders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ShipperID" ColumnName="ShipperID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spConfirmPendingOrder" FunctionName="ChocolateStoreUkModel.Store.spConfirmPendingOrder" />
+          <FunctionImportMapping FunctionImportName="spCreatePendingOrder" FunctionName="ChocolateStoreUkModel.Store.spCreatePendingOrder" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

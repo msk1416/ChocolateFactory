@@ -4,15 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9499d151a69745aca0fa942889f0259c" Name="Diagram1">
+      <Diagram DiagramId="34926d91dffe4101b815e5024495b32c" Name="Diagram1">
         <EntityTypeShape EntityType="ChocolateStoreUkModel.Client" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateStoreUkModel.Employee" Width="1.5" PointX="5.875" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ChocolateStoreUkModel.Order" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateStoreUkModel.ProductEntity" Width="1.5" PointX="3.625" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateStoreUkModel.Shipper" Width="1.5" PointX="0.625" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateStoreUkModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChocolateStoreUkModel.Product" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChocolateStoreUkModel.Shipper" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChocolateStoreUkModel.PendingOrder" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="ChocolateStoreUkModel.FK_Orders_Clients" ManuallyRouted="false" />
-        <AssociationConnector Association="ChocolateStoreUkModel.FK_Orders_Employees" ManuallyRouted="false" />
         <AssociationConnector Association="ChocolateStoreUkModel.FK_Orders_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ChocolateStoreUkModel.FK_Orders_Shippers" ManuallyRouted="false" />
       </Diagram>

@@ -12,16 +12,16 @@ namespace ProductService
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductEntity
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductEntity()
+        public Product()
         {
             this.Orders = new HashSet<Order>();
         }
     
         public int ProductID { get; set; }
-        public string Name { get; set; }
+        public string ProductName { get; set; }
         public string Type { get; set; }
         public int Quantity { get; set; }
         public int Price { get; set; }

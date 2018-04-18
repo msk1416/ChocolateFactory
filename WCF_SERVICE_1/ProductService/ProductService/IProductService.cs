@@ -27,7 +27,9 @@ namespace ProductService
 
         [OperationContract]
         bool updateProduct(int _id, int _quant, int _price, int _cost);
-        
+
+        [OperationContract]
+        bool requestOrder(int clientId, int productId, int quantity, String date, int shipperId);
     }
 
     public class Chocolate
@@ -66,8 +68,8 @@ namespace ProductService
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
-    public class Product
-    {
+    public class ProductExtra
+    {/*
         [DataMember]
         public int ID { get; set; }
         [DataMember]
@@ -79,6 +81,6 @@ namespace ProductService
         [DataMember]
         public int Price { get; set; }
         [DataMember]
-        public int Cost { get; set; }
+        public int Cost { get; set; }*/
     }
 }

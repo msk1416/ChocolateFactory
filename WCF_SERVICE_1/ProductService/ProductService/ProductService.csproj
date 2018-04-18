@@ -53,51 +53,55 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChocolateUkStoreEntitiesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChocolateUkStoreEntitiesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChocolateUkStoreEntitiesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChocolateUkStoreEntitiesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChocolateUkStoreEntitiesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChocolateUkStoreEntitiesModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Client.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
+      <DependentUpon>ChocolateUkStoreEntitiesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\HQServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Employee.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="IProductService.cs" />
     <Compile Include="Order.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
+      <DependentUpon>ChocolateUkStoreEntitiesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductEntity.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
+    <Compile Include="PendingOrder.cs">
+      <DependentUpon>ChocolateUkStoreEntitiesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductEntityModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductEntityModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductEntityModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductEntityModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductEntityModel.edmx</DependentUpon>
+    <Compile Include="Product.cs">
+      <DependentUpon>ChocolateUkStoreEntitiesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProductServiceClass.cs" />
     <Compile Include="Shipper.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
+      <DependentUpon>ChocolateUkStoreEntitiesModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="ChocolateUkStoreEntitiesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ChocolateUkStoreEntitiesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ChocolateUkStoreEntitiesModel.edmx.diagram">
+      <DependentUpon>ChocolateUkStoreEntitiesModel.edmx</DependentUpon>
     </None>
     <None Include="Connected Services\HQServiceReference\HQService.wsdl" />
     <None Include="Connected Services\HQServiceReference\item.xsd">
@@ -113,13 +117,6 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <EntityDeploy Include="ProductEntityModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProductEntityModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="ProductEntityModel.edmx.diagram">
-      <DependentUpon>ProductEntityModel.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -132,22 +129,24 @@
     <None Include="Connected Services\HQServiceReference\configuration.svcinfo" />
     <None Include="Connected Services\HQServiceReference\configuration91.svcinfo" />
     <None Include="Connected Services\HQServiceReference\item.disco" />
-    <Content Include="ProductEntityModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductEntityModel.edmx</DependentUpon>
-      <LastGenOutput>ProductEntityModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ProductEntityModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductEntityModel.edmx</DependentUpon>
-      <LastGenOutput>ProductEntityModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\HQServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ChocolateUkStoreEntitiesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChocolateUkStoreEntitiesModel.edmx</DependentUpon>
+      <LastGenOutput>ChocolateUkStoreEntitiesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ChocolateUkStoreEntitiesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChocolateUkStoreEntitiesModel.edmx</DependentUpon>
+      <LastGenOutput>ChocolateUkStoreEntitiesModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

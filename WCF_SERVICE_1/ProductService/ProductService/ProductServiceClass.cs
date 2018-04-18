@@ -14,7 +14,7 @@ namespace ProductService
     {
         public Product GetProduct(int p_id)
         {
-            ChocolateStoreUkEntities context = new ChocolateStoreUkEntities();
+            /*ChocolateStoreUkEntities context = new ChocolateStoreUkEntities();
             var productEntity = (from p
                                  in context.ProductEntities
                                  where p.ProductID == p_id
@@ -25,9 +25,9 @@ namespace ProductService
             } else
             {
                 throw new Exception("Invalid product id.");
-            }
-            
-        }
+            }*/
+            return new Product();
+        }/*
         private Product TranslateProductEntityToProduct(
               ProductEntity productEntity)
         {
@@ -39,10 +39,10 @@ namespace ProductService
             product.Price = productEntity.Price;
             product.Cost = productEntity.Cost;
             return product;
-        }
+        }*/
 
         public Product[] GetProducts()
-        {
+        {/*
             using (var ctx = new ChocolateStoreUkEntities())
             {
                 var productEntities = (from p
@@ -55,13 +55,13 @@ namespace ProductService
                     ret[i] = TranslateProductEntityToProduct(arr[i]);
                 }
                 return ret;
-            }
-                
+            }*/
+            return null;
         }
 
         public bool newProduct(int _id, string _name, string _type, int _quant, int _price, int _cost)
         {
-            HQServiceReference.HQServiceClient client = new HQServiceReference.HQServiceClient();
+            /*HQServiceReference.HQServiceClient client = new HQServiceReference.HQServiceClient();
             if (client.CheckInsertIsDone(_id, _name, _type, _quant, _price, _cost))
             {
                 ProductEntity new_p = new ProductEntity();
@@ -80,13 +80,13 @@ namespace ProductService
             } else
             {
                 return false;
-            }
-            
+            }*/
+            return false;
         }
 
         public bool updateProduct(int _id, int _quant, int _price, int _cost)
         {
-            HQServiceReference.HQServiceClient client = new HQServiceReference.HQServiceClient();
+            /*HQServiceReference.HQServiceClient client = new HQServiceReference.HQServiceClient();
             if (client.CheckUpdateProductIsDone(_id, _quant, _price, _cost))
             {
                 using (var ctx = new ChocolateStoreUkEntities())
@@ -104,6 +104,25 @@ namespace ProductService
             } else
             {
                 return false;
+            }*/
+            return false;
+        }
+
+        public bool requestOrder(int clientId, int productId, int quantity, string date, int shipperId)
+        {
+            using (var ctx = new ChocolateStoreUkEntities2())
+            {
+                var result = ctx.spCreatePendingOrder(clientId, productId, quantity, System.DateTime.Parse(date), shipperId);
+                return (result > 0);
+            }
+        }
+
+        public bool acceptOrder(int orderId)
+        {
+            using (var ctx = new ChocolateStoreUkEntities2())
+            {
+                var result = ctx.spConfirmPendingOrder(orderId);
+                return (result > 0);
             }
         }
     }
