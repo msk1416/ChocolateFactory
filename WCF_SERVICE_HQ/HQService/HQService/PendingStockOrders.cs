@@ -18,7 +18,5 @@ namespace HQService
         public string branch { get; set; }
         public int ProductID { get; set; }
         public int QuantityAsked { get; set; }
-    
-        public virtual StockOrdersLog StockOrdersLog { get; set; }
     }
 }

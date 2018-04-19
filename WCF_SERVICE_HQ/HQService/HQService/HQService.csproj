@@ -52,68 +52,95 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
+    <Compile Include="Branches.cs">
+      <DependentUpon>ChocolateCoHQEntitiesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Employee.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
+    <Compile Include="ChocolateCoHQEntitiesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChocolateCoHQEntitiesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChocolateCoHQEntitiesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChocolateCoHQEntitiesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChocolateCoHQEntitiesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChocolateCoHQEntitiesModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\UkBranchServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="IHQService.cs" />
-    <Compile Include="Order.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
+    <Compile Include="OrdersLog.cs">
+      <DependentUpon>ChocolateCoHQEntitiesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductEntity.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
+    <Compile Include="PendingStockOrders.cs">
+      <DependentUpon>ChocolateCoHQEntitiesModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductEntityModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductEntityModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductEntityModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ProductEntityModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProductEntityModel.edmx</DependentUpon>
+    <Compile Include="ProductStock.cs">
+      <DependentUpon>ChocolateCoHQEntitiesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HQService.cs" />
-    <Compile Include="Shipper.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>ProductEntityModel.tt</DependentUpon>
+    <Compile Include="HQServiceClass.cs" />
+    <Compile Include="StockOrdersLog.cs">
+      <DependentUpon>ChocolateCoHQEntitiesModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="ProductEntityModel.edmx">
+    <EntityDeploy Include="ChocolateCoHQEntitiesModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ProductEntityModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ChocolateCoHQEntitiesModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="packages.config" />
-    <None Include="ProductEntityModel.edmx.diagram">
-      <DependentUpon>ProductEntityModel.edmx</DependentUpon>
+    <None Include="ChocolateCoHQEntitiesModel.edmx.diagram">
+      <DependentUpon>ChocolateCoHQEntitiesModel.edmx</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ProductEntityModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ProductEntityModel.Context.cs</LastGenOutput>
-      <DependentUpon>ProductEntityModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="ProductEntityModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ProductEntityModel.edmx</DependentUpon>
-      <LastGenOutput>ProductEntityModel.cs</LastGenOutput>
-    </Content>
+    <None Include="Connected Services\UkBranchServiceReference\HQService.UkBranchServiceReference.Product.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\UkBranchServiceReference\ProductService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UkBranchServiceReference\service.wsdl" />
+    <None Include="Connected Services\UkBranchServiceReference\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UkBranchServiceReference\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ChocolateCoHQEntitiesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChocolateCoHQEntitiesModel.edmx</DependentUpon>
+      <LastGenOutput>ChocolateCoHQEntitiesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ChocolateCoHQEntitiesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChocolateCoHQEntitiesModel.edmx</DependentUpon>
+      <LastGenOutput>ChocolateCoHQEntitiesModel.cs</LastGenOutput>
+    </Content>
+    <None Include="Connected Services\UkBranchServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\UkBranchServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\UkBranchServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\UkBranchServiceReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

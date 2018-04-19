@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="ChocolateCoHQModel.ProductStock" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ChocolateCoHQModel.OrdersLog" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ChocolateCoHQModel.StockOrdersLog" Width="1.5" PointX="5" PointY="0.75" />
-        <AssociationConnector Association="ChocolateCoHQModel.FK_StockOrdersLog_PendingStockOrders" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

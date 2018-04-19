@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="3eskKUcFK+ds3sSkjbeBivk0rkk=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="EHEMfT884EKPHl/hV5LQVS+gPGI=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IHQService">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IHQService" contract="HQServiceReference.IHQService" bindingType="basicHttpBinding" address="http://localhost:8733/Design_Time_Addresses/HQService/HQService/" bindingConfiguration="BasicHttpBinding_IHQService">
+    <endpoint name="BasicHttpBinding_IHQService" contract="HQServiceReference.IHQService" bindingType="basicHttpBinding" address="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/" bindingConfiguration="BasicHttpBinding_IHQService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:8733/Design_Time_Addresses/HQService/HQService/</serializedValue>
+          <serializedValue>http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

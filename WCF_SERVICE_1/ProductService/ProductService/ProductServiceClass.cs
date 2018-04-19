@@ -12,102 +12,6 @@ namespace ProductService
     //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class ProductServiceClass : IProductService
     {
-        public Product GetProduct(int p_id)
-        {
-            /*ChocolateStoreUkEntities context = new ChocolateStoreUkEntities();
-            var productEntity = (from p
-                                 in context.ProductEntities
-                                 where p.ProductID == p_id
-                                 select p).FirstOrDefault();
-            if (productEntity != null)
-            {
-                return TranslateProductEntityToProduct(productEntity);
-            } else
-            {
-                throw new Exception("Invalid product id.");
-            }*/
-            return new Product();
-        }/*
-        private Product TranslateProductEntityToProduct(
-              ProductEntity productEntity)
-        {
-            Product product = new Product();
-            product.ID = productEntity.ProductID;
-            product.Name = productEntity.Name.Trim();
-            product.Type = productEntity.Type.Trim();
-            product.Quantity = productEntity.Quantity;
-            product.Price = productEntity.Price;
-            product.Cost = productEntity.Cost;
-            return product;
-        }*/
-
-        public Product[] GetProducts()
-        {/*
-            using (var ctx = new ChocolateStoreUkEntities())
-            {
-                var productEntities = (from p
-                                        in ctx.ProductEntities
-                                        select p);
-                ProductEntity[] arr = productEntities.ToArray();
-                Product[] ret = new Product[arr.Length];
-                for (int i = 0; i < arr.Length; i++)
-                {
-                    ret[i] = TranslateProductEntityToProduct(arr[i]);
-                }
-                return ret;
-            }*/
-            return null;
-        }
-
-        public bool newProduct(int _id, string _name, string _type, int _quant, int _price, int _cost)
-        {
-            /*HQServiceReference.HQServiceClient client = new HQServiceReference.HQServiceClient();
-            if (client.CheckInsertIsDone(_id, _name, _type, _quant, _price, _cost))
-            {
-                ProductEntity new_p = new ProductEntity();
-                new_p.ProductID = _id;
-                new_p.Name = _name;
-                new_p.Type = _type;
-                new_p.Quantity = _quant;
-                new_p.Price = _price;
-                new_p.Cost = _cost;
-                using (var ctx = new ChocolateStoreUkEntities())
-                {
-                    var res = ctx.ProductEntities.Add(new_p);
-                    ctx.SaveChanges();
-                    return (res != null);
-                }
-            } else
-            {
-                return false;
-            }*/
-            return false;
-        }
-
-        public bool updateProduct(int _id, int _quant, int _price, int _cost)
-        {
-            /*HQServiceReference.HQServiceClient client = new HQServiceReference.HQServiceClient();
-            if (client.CheckUpdateProductIsDone(_id, _quant, _price, _cost))
-            {
-                using (var ctx = new ChocolateStoreUkEntities())
-                {
-                    var productToUpdate = (from p
-                                        in ctx.ProductEntities
-                                           where p.ProductID == _id
-                                           select p).FirstOrDefault();
-                    if (_quant >= 0) productToUpdate.Quantity = _quant;
-                    if (_price >= 0) productToUpdate.Price = _price;
-                    if (_cost >= 0)  productToUpdate.Cost = _cost;
-                    var res = ctx.SaveChanges();
-                    return (res > 0);
-                }
-            } else
-            {
-                return false;
-            }*/
-            return false;
-        }
-
         public int requestOrder(int clientId, int productId, int quantity, string date, int shipperId)
         {
             using (var ctx = new ChocolateStoreUkEntities2())
@@ -126,7 +30,18 @@ namespace ProductService
             using (var ctx = new ChocolateStoreUkEntities2())
             {
                 var result = ctx.spConfirmPendingOrder(orderId);
-                return (result > 0);
+                if (result > 0)
+                {
+                    Order o = ctx.Orders.Find(orderId);
+                    HQServiceReference.HQServiceClient client =
+                        new HQServiceReference.HQServiceClient();
+                    bool logRet =
+                        client.logLocalOrder(o.OrderID, o.ClientID, o.ProductID, o.Date.ToShortDateString(), o.Quantity, o.ShipperID, true);
+                    return logRet;
+                } else
+                {
+                    return false;
+                }
             }
         }
 
@@ -138,6 +53,24 @@ namespace ProductService
                 p.Quantity = p.Quantity + quantity;
                 int ret = ctx.SaveChanges();
                 return (ret > 0);
+            }
+        }
+
+        //return new order id in hq table
+        public int requestStockToHQ(int productId, int quantity)
+        {
+            using (var ctx = new ChocolateStoreUkEntities2())
+            {
+                int proposedIdFromOrders = ctx.Orders.Max(p => p.OrderID);
+                int proposedIdFromPending = ctx.PendingOrders.Max(p => p.OrderID);
+                HQServiceReference.HQServiceClient client =
+                    new HQServiceReference.HQServiceClient();
+                int newId = client.requestStockHQ(Math.Max(proposedIdFromOrders, 
+                                                proposedIdFromPending), 
+                                                "uk", 
+                                                productId, 
+                                                quantity);
+                return newId;
             }
         }
     }

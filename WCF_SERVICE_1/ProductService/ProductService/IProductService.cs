@@ -11,22 +11,6 @@ namespace ProductService
     [ServiceContract]
     public interface IProductService
     {
-        [OperationContract]
-        Product GetProduct(int p_id);
-
-        [OperationContract]
-        [WebGet(UriTemplate = "/Products", ResponseFormat = WebMessageFormat.Xml)]
-        Product[] GetProducts();
-
-        [OperationContract]
-        [WebInvoke(Method = "POST",
-            UriTemplate = "/InsertProduct",
-            ResponseFormat = WebMessageFormat.Xml,
-            BodyStyle = WebMessageBodyStyle.Wrapped)]
-        Boolean newProduct(int _id, string _name, string _type, int _quant, int _price, int _cost);
-
-        [OperationContract]
-        bool updateProduct(int _id, int _quant, int _price, int _cost);
 
         [OperationContract]
         int requestOrder(int clientId, int productId, int quantity, String date, int shipperId);
@@ -36,6 +20,9 @@ namespace ProductService
 
         [OperationContract]
         bool deliverStock(int productId, int quantity);
+
+        [OperationContract]
+        int requestStockToHQ(int productId, int quantity);
     }
 
     public class Chocolate

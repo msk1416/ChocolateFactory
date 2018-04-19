@@ -8,7 +8,7 @@ using System.Text;
 namespace HQService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
-    public class HQService : IHQService
+    public class HQServiceClass : IHQService
     {
         public int acceptStockRequest(int orderId)
         {
@@ -18,14 +18,18 @@ namespace HQService
                                 new UkBranchServiceReference.ProductServiceClient();
                 PendingStockOrders pso = ctx.PendingStockOrders.Find(orderId);
                 bool ret = client.deliverStock(pso.ProductID, pso.QuantityAsked);
+                client.Close();
                 if (ret)
                 {
+                    ProductStock ps = ctx.ProductStock.Find(pso.ProductID);
+                    ps.quantity = ps.quantity - pso.QuantityAsked;
                     StockOrdersLog sol = new StockOrdersLog();
                     sol.OrderId = orderId;
                     sol.ProductID = pso.ProductID;
                     sol.branch = pso.branch;
                     sol.Quantity = pso.QuantityAsked;
-                    ctx.StockOrdersLog.Add(sol);
+                    StockOrdersLog errSol = ctx.StockOrdersLog.Add(sol);
+
                     ctx.PendingStockOrders.Remove(pso);
                     int rowcount = ctx.SaveChanges();
                     return rowcount;
@@ -33,7 +37,6 @@ namespace HQService
                 {
                     return -1;
                 }
-                client.Close();
             }
             
         }
@@ -64,10 +67,22 @@ namespace HQService
                 pso.branch = branch;
                 pso.ProductID = productId;
                 pso.QuantityAsked = quantityAsked;
-                int maxLoggedId = ctx.OrdersLog.Max(o => o.OrderID);
-                int maxPendingId = ctx.PendingStockOrders.Max(o => o.OrderID);
+                int maxLoggedId = 0, maxPendingId = 0, maxStockLogId = 0;
+                if (ctx.OrdersLog.Any()) 
+                {
+                    maxLoggedId = ctx.OrdersLog.Max(o => o.OrderID);
+                }
+                if (ctx.PendingStockOrders.Any())
+                {
+                    maxPendingId = ctx.PendingStockOrders.Max(o => o.OrderID);
+                }
+                if (ctx.StockOrdersLog.Any())
+                {
+                    maxStockLogId = ctx.StockOrdersLog.Max(o => o.OrderId);
+                }
                 int finalId = Math.Max(maxLoggedId, maxPendingId);
-                finalId = Math.Max(finalId, proposedOrderId);
+                finalId = Math.Max(finalId, maxStockLogId);
+                finalId = Math.Max(finalId, proposedOrderId) + 1;
                 pso.OrderID = finalId;
                 ctx.PendingStockOrders.Add(pso);
                 int ret = ctx.SaveChanges();

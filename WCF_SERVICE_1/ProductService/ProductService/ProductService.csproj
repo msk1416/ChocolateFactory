@@ -103,18 +103,12 @@
     <None Include="ChocolateUkStoreEntitiesModel.edmx.diagram">
       <DependentUpon>ChocolateUkStoreEntitiesModel.edmx</DependentUpon>
     </None>
-    <None Include="Connected Services\HQServiceReference\HQService.wsdl" />
-    <None Include="Connected Services\HQServiceReference\item.xsd">
+    <None Include="Connected Services\HQServiceReference\service.wsdl" />
+    <None Include="Connected Services\HQServiceReference\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\HQServiceReference\item1.xsd">
+    <None Include="Connected Services\HQServiceReference\service1.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\HQServiceReference\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\HQServiceReference\ProductService.HQServiceReference.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -128,7 +122,6 @@
     </None>
     <None Include="Connected Services\HQServiceReference\configuration.svcinfo" />
     <None Include="Connected Services\HQServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\HQServiceReference\item.disco" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

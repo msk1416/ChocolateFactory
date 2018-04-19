@@ -18,7 +18,5 @@ namespace HQService
         public string branch { get; set; }
         public int ProductID { get; set; }
         public int Quantity { get; set; }
-    
-        public virtual PendingStockOrders PendingStockOrders { get; set; }
     }
 }

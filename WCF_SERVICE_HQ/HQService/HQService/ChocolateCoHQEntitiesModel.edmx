@@ -16,7 +16,7 @@
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
-          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="LocalClientID" Type="int" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
@@ -28,7 +28,7 @@
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
-          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
           <Property Name="branch" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="QuantityAsked" Type="int" Nullable="false" />
@@ -51,28 +51,12 @@
           <Property Name="ProductID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_StockOrdersLog_PendingStockOrders">
-          <End Role="PendingStockOrders" Type="Self.PendingStockOrders" Multiplicity="1" />
-          <End Role="StockOrdersLog" Type="Self.StockOrdersLog" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="PendingStockOrders">
-              <PropertyRef Name="OrderID" />
-            </Principal>
-            <Dependent Role="StockOrdersLog">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ChocolateCoHQModelStoreContainer">
           <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdersLog" EntityType="Self.OrdersLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PendingStockOrders" EntityType="Self.PendingStockOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductStock" EntityType="Self.ProductStock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockOrdersLog" EntityType="Self.StockOrdersLog" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_StockOrdersLog_PendingStockOrders" Association="Self.FK_StockOrdersLog_PendingStockOrders">
-            <End Role="PendingStockOrders" EntitySet="PendingStockOrders" />
-            <End Role="StockOrdersLog" EntitySet="StockOrdersLog" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -89,11 +73,10 @@
           <Key>
             <PropertyRef Name="OrderID" />
           </Key>
-          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="branch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="QuantityAsked" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="StockOrdersLog" Relationship="ChocolateCoHQModel.FK_StockOrdersLog_PendingStockOrders" FromRole="PendingStockOrders" ToRole="StockOrdersLog" />
         </EntityType>
         <EntityType Name="ProductStock">
           <Key>
@@ -107,14 +90,8 @@
         <EntityType Name="OrdersLog">
           <Key>
             <PropertyRef Name="OrderID" />
-            <PropertyRef Name="LocalClientID" />
-            <PropertyRef Name="ProductID" />
-            <PropertyRef Name="Date" />
-            <PropertyRef Name="Quantity" />
-            <PropertyRef Name="LocalShipperID" />
-            <PropertyRef Name="Accepted" />
           </Key>
-          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="LocalClientID" Type="Int32" Nullable="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
@@ -128,10 +105,6 @@
           <EntitySet Name="ProductStock" EntityType="Self.ProductStock" />
           <EntitySet Name="OrdersLog" EntityType="Self.OrdersLog" />
           <EntitySet Name="StockOrdersLog" EntityType="ChocolateCoHQModel.StockOrdersLog" />
-          <AssociationSet Name="FK_StockOrdersLog_PendingStockOrders" Association="ChocolateCoHQModel.FK_StockOrdersLog_PendingStockOrders">
-            <End Role="PendingStockOrders" EntitySet="PendingStockOrders" />
-            <End Role="StockOrdersLog" EntitySet="StockOrdersLog" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="StockOrdersLog">
           <Key>
@@ -141,20 +114,7 @@
           <Property Name="branch" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProductID" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PendingStockOrders" Relationship="ChocolateCoHQModel.FK_StockOrdersLog_PendingStockOrders" FromRole="StockOrdersLog" ToRole="PendingStockOrders" />
         </EntityType>
-        <Association Name="FK_StockOrdersLog_PendingStockOrders">
-          <End Type="ChocolateCoHQModel.PendingStockOrders" Role="PendingStockOrders" Multiplicity="1" />
-          <End Type="ChocolateCoHQModel.StockOrdersLog" Role="StockOrdersLog" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="PendingStockOrders">
-              <PropertyRef Name="OrderID" />
-            </Principal>
-            <Dependent Role="StockOrdersLog">
-              <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
