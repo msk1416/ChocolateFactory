@@ -17,4 +17,21 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderDTO" nillable="true" type="tns:OrderDTO" />
+  <xs:complexType name="ArrayOfPendingOrderDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PendingOrderDTO" nillable="true" type="tns:PendingOrderDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPendingOrderDTO" nillable="true" type="tns:ArrayOfPendingOrderDTO" />
+  <xs:complexType name="PendingOrderDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClientID" type="xs:int" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderID" type="xs:int" />
+      <xs:element minOccurs="0" name="ProductID" type="xs:int" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="ShipperID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PendingOrderDTO" nillable="true" type="tns:PendingOrderDTO" />
 </xs:schema>

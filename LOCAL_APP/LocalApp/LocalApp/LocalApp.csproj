@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{406DDAE9-8263-4AF7-987F-34F25B5D3396}</ProjectGuid>
+    <ProjectGuid>{3D0F480F-702E-4877-B6A6-D971DECE7899}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SOAP_REST_CLIENT</RootNamespace>
-    <AssemblyName>SOAP_REST_CLIENT</AssemblyName>
+    <RootNamespace>LocalApp</RootNamespace>
+    <AssemblyName>LocalApp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,12 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.cs" />
     <Compile Include="Connected Services\ProductServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Connected Services\ProductServiceReference\LocalApp.ProductServiceReference.OrderDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductServiceReference\LocalApp.ProductServiceReference.PendingOrderDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ProductServiceReference\ProductService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -64,9 +70,6 @@
     </None>
     <None Include="Connected Services\ProductServiceReference\service1.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ProductServiceReference\SOAP_REST_CLIENT.ProductServiceReference.OrderDTO.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

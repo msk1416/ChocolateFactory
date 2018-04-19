@@ -21,6 +21,10 @@ namespace SOAP_REST_CLIENT
                 if (line == "1")
                 {
                     ProductServiceReference.Product[] all = client.GetProducts();
+                    ProductServiceReference.ProductServiceClient client =
+                        new ProductServiceClient();
+                    OrderDTO o;
+                    
                     for (int i = 0; i < all.Length; i++)
                     {
                         Console.WriteLine("id " + all[i].ID + ": " 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SOAP_REST_CLIENT.ProductServiceReference {
+namespace LocalApp.ProductServiceReference {
     using System.Runtime.Serialization;
     using System;
     
@@ -18,6 +18,131 @@ namespace SOAP_REST_CLIENT.ProductServiceReference {
     [System.Runtime.Serialization.DataContractAttribute(Name="OrderDTO", Namespace="http://schemas.datacontract.org/2004/07/ProductService")]
     [System.SerializableAttribute()]
     public partial class OrderDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ClientIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime DateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int OrderIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ProductIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ShipperIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ClientID {
+            get {
+                return this.ClientIDField;
+            }
+            set {
+                if ((this.ClientIDField.Equals(value) != true)) {
+                    this.ClientIDField = value;
+                    this.RaisePropertyChanged("ClientID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Date {
+            get {
+                return this.DateField;
+            }
+            set {
+                if ((this.DateField.Equals(value) != true)) {
+                    this.DateField = value;
+                    this.RaisePropertyChanged("Date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int OrderID {
+            get {
+                return this.OrderIDField;
+            }
+            set {
+                if ((this.OrderIDField.Equals(value) != true)) {
+                    this.OrderIDField = value;
+                    this.RaisePropertyChanged("OrderID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ProductID {
+            get {
+                return this.ProductIDField;
+            }
+            set {
+                if ((this.ProductIDField.Equals(value) != true)) {
+                    this.ProductIDField = value;
+                    this.RaisePropertyChanged("ProductID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ShipperID {
+            get {
+                return this.ShipperIDField;
+            }
+            set {
+                if ((this.ShipperIDField.Equals(value) != true)) {
+                    this.ShipperIDField = value;
+                    this.RaisePropertyChanged("ShipperID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PendingOrderDTO", Namespace="http://schemas.datacontract.org/2004/07/ProductService")]
+    [System.SerializableAttribute()]
+    public partial class PendingOrderDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -158,16 +283,19 @@ namespace SOAP_REST_CLIENT.ProductServiceReference {
         int requestStockToHQ(int productId, int quantity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/getOrders", ReplyAction="http://tempuri.org/IProductService/getOrdersResponse")]
-        SOAP_REST_CLIENT.ProductServiceReference.OrderDTO[] getOrders();
+        LocalApp.ProductServiceReference.OrderDTO[] getOrders();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/getPendingOrders", ReplyAction="http://tempuri.org/IProductService/getPendingOrdersResponse")]
+        LocalApp.ProductServiceReference.PendingOrderDTO[] getPendingOrders();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProductServiceChannel : SOAP_REST_CLIENT.ProductServiceReference.IProductService, System.ServiceModel.IClientChannel {
+    public interface IProductServiceChannel : LocalApp.ProductServiceReference.IProductService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProductServiceClient : System.ServiceModel.ClientBase<SOAP_REST_CLIENT.ProductServiceReference.IProductService>, SOAP_REST_CLIENT.ProductServiceReference.IProductService {
+    public partial class ProductServiceClient : System.ServiceModel.ClientBase<LocalApp.ProductServiceReference.IProductService>, LocalApp.ProductServiceReference.IProductService {
         
         public ProductServiceClient() {
         }
@@ -208,8 +336,12 @@ namespace SOAP_REST_CLIENT.ProductServiceReference {
             return base.Channel.requestStockToHQ(productId, quantity);
         }
         
-        public SOAP_REST_CLIENT.ProductServiceReference.OrderDTO[] getOrders() {
+        public LocalApp.ProductServiceReference.OrderDTO[] getOrders() {
             return base.Channel.getOrders();
+        }
+        
+        public LocalApp.ProductServiceReference.PendingOrderDTO[] getPendingOrders() {
+            return base.Channel.getPendingOrders();
         }
     }
 }

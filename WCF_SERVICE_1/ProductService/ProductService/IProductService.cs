@@ -26,6 +26,21 @@ namespace ProductService
 
         [OperationContract]
         int requestStockToHQ(int productId, int quantity);
+
+        [OperationContract]
+        List<OrderDTO> getOrders();
+
+        [OperationContract]
+        List<PendingOrderDTO> getPendingOrders();
+
+        [OperationContract]
+        List<ClientDTO> getClients();
+
+        [OperationContract]
+        List<ProductDTO> getProducts();
+
+        [OperationContract]
+        List<ShipperDTO> getShippers();
     }
 
     public class Chocolate

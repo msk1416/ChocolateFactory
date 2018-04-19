@@ -68,6 +68,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChocolateUkStoreEntitiesModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DTOs.cs" />
     <Compile Include="Client.cs">
       <DependentUpon>ChocolateUkStoreEntitiesModel.tt</DependentUpon>
     </Compile>
