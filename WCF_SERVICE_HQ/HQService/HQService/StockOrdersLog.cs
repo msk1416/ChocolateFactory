@@ -12,13 +12,13 @@ namespace HQService
     using System;
     using System.Collections.Generic;
     
-    public partial class PendingStockOrders
+    public partial class StockOrdersLog
     {
-        public int OrderID { get; set; }
+        public int OrderId { get; set; }
         public string branch { get; set; }
         public int ProductID { get; set; }
-        public int QuantityAsked { get; set; }
+        public int Quantity { get; set; }
     
-        public virtual StockOrdersLog StockOrdersLog { get; set; }
+        public virtual PendingStockOrders PendingStockOrders { get; set; }
     }
 }

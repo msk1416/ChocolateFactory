@@ -29,5 +29,6 @@ namespace HQService
         public virtual DbSet<PendingStockOrders> PendingStockOrders { get; set; }
         public virtual DbSet<ProductStock> ProductStock { get; set; }
         public virtual DbSet<OrdersLog> OrdersLog { get; set; }
+        public virtual DbSet<StockOrdersLog> StockOrdersLog { get; set; }
     }
 }

@@ -11,17 +11,15 @@ namespace HQService
     [ServiceContract]
     public interface IHQService
     {
-        [OperationContract]
-        string GetData(int value);
 
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        int requestStockHQ(int proposedOrderId, String branch, int productId, int quantityAsked);
 
         [OperationContract]
-        bool CheckInsertIsDone(int _id, string _name, string _type, int _quant, int _price, int _cost);
+        int acceptStockRequest(int orderId);
 
         [OperationContract]
-        bool CheckUpdateProductIsDone(int _id, int new_quant, int new_price, int new_cost);
+        bool logLocalOrder(int orderId, int localClientId, int productId, String date, int quantity, int localShipperId, bool isAccepted);
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

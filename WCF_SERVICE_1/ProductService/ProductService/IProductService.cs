@@ -33,6 +33,9 @@ namespace ProductService
 
         [OperationContract]
         bool acceptOrder(int orderId);
+
+        [OperationContract]
+        bool deliverStock(int productId, int quantity);
     }
 
     public class Chocolate

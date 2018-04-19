@@ -10,56 +10,72 @@ namespace HQService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class HQService : IHQService
     {
-        public bool CheckInsertIsDone(int _id, string _name, string _type, int _quant, int _price, int _cost)
+        public int acceptStockRequest(int orderId)
         {
-            ProductEntity new_p = new ProductEntity();
-            new_p.ProductID = _id;
-            new_p.Name = _name;
-            new_p.Type = _type;
-            new_p.Quantity = _quant;
-            new_p.Price = _price;
-            new_p.Cost = _cost;
-            using (var ctx = new ChocolateCoHQEntities())
+            using (var ctx = new ChocolateCoHQEntities1())
             {
-                var res = ctx.ProductEntities.Add(new_p);
-                ctx.SaveChanges();
-                return (res != null);
+                UkBranchServiceReference.ProductServiceClient client = 
+                                new UkBranchServiceReference.ProductServiceClient();
+                PendingStockOrders pso = ctx.PendingStockOrders.Find(orderId);
+                bool ret = client.deliverStock(pso.ProductID, pso.QuantityAsked);
+                if (ret)
+                {
+                    StockOrdersLog sol = new StockOrdersLog();
+                    sol.OrderId = orderId;
+                    sol.ProductID = pso.ProductID;
+                    sol.branch = pso.branch;
+                    sol.Quantity = pso.QuantityAsked;
+                    ctx.StockOrdersLog.Add(sol);
+                    ctx.PendingStockOrders.Remove(pso);
+                    int rowcount = ctx.SaveChanges();
+                    return rowcount;
+                } else
+                {
+                    return -1;
+                }
+                client.Close();
+            }
+            
+        }
+
+        public bool logLocalOrder(int orderId, int localClientId, int productId, string date, int quantity, int localShipperId, bool isAccepted)
+        {
+            using (var ctx = new ChocolateCoHQEntities1())
+            {
+                OrdersLog ol = new OrdersLog();
+                ol.OrderID = orderId;
+                ol.LocalClientID = localClientId;
+                ol.ProductID = productId;
+                ol.Date = DateTime.Parse(date);
+                ol.Quantity = quantity;
+                ol.LocalShipperID = localShipperId;
+                ol.Accepted = (short) (isAccepted ? 1 : 0);
+                ctx.OrdersLog.Add(ol);
+                int ret = ctx.SaveChanges();
+                return (ret > 0);
             }
         }
 
-        public bool CheckUpdateProductIsDone(int _id, int new_quant, int new_price, int new_cost)
+        public int requestStockHQ(int proposedOrderId, string branch, int productId, int quantityAsked)
         {
-
-            using (var ctx = new ChocolateCoHQEntities())
+            using (var ctx = new ChocolateCoHQEntities1())
             {
-                var productToUpdate = (from p
-                                    in ctx.ProductEntities
-                                     where p.ProductID == _id
-                                     select p).FirstOrDefault();
-                if (new_quant >= 0) productToUpdate.Quantity = new_quant;
-                if (new_price >= 0) productToUpdate.Price = new_price;
-                if (new_cost >= 0) productToUpdate.Cost = new_cost;
-                var res = ctx.SaveChanges();
-                return (res > 0);
+                PendingStockOrders pso = new PendingStockOrders();
+                pso.branch = branch;
+                pso.ProductID = productId;
+                pso.QuantityAsked = quantityAsked;
+                int maxLoggedId = ctx.OrdersLog.Max(o => o.OrderID);
+                int maxPendingId = ctx.PendingStockOrders.Max(o => o.OrderID);
+                int finalId = Math.Max(maxLoggedId, maxPendingId);
+                finalId = Math.Max(finalId, proposedOrderId);
+                pso.OrderID = finalId;
+                ctx.PendingStockOrders.Add(pso);
+                int ret = ctx.SaveChanges();
+                if (ret > 0) return finalId;
+                else return -1;
             }
         }
 
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
-        }
-
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
+        
     }
 }

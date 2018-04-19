@@ -129,5 +129,16 @@ namespace ProductService
                 return (result > 0);
             }
         }
+
+        public bool deliverStock(int productId, int quantity)
+        {
+            using (var ctx = new ChocolateStoreUkEntities2())
+            {
+                Product p = ctx.Products.Find(productId);
+                p.Quantity = p.Quantity + quantity;
+                int ret = ctx.SaveChanges();
+                return (ret > 0);
+            }
+        }
     }
 }
