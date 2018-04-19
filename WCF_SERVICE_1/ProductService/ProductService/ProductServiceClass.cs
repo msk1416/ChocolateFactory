@@ -73,5 +73,18 @@ namespace ProductService
                 return newId;
             }
         }
+
+        public bool dismissOrder(int orderId)
+        {
+            using (var ctx = new ChocolateStoreUkEntities2())
+            {
+                PendingOrder po = ctx.PendingOrders.Find(orderId);
+                HQServiceReference.HQServiceClient client =
+                    new HQServiceReference.HQServiceClient();
+                bool logRet =
+                    client.logLocalOrder(po.OrderID, po.ClientID, po.ProductID, po.Date.ToShortDateString(), po.Quantity, po.ShipperID, false);
+                return logRet;
+            }
+        }
     }
 }

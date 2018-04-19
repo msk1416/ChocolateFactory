@@ -19,6 +19,9 @@ namespace ProductService
         bool acceptOrder(int orderId);
 
         [OperationContract]
+        bool dismissOrder(int orderId);
+
+        [OperationContract]
         bool deliverStock(int productId, int quantity);
 
         [OperationContract]
