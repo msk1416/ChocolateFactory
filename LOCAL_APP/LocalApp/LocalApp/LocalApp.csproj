@@ -55,10 +55,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Connected Services\ProductServiceReference\LocalApp.ProductServiceReference.ClientDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ProductServiceReference\LocalApp.ProductServiceReference.OrderDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ProductServiceReference\LocalApp.ProductServiceReference.PendingOrderDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductServiceReference\LocalApp.ProductServiceReference.ProductDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProductServiceReference\LocalApp.ProductServiceReference.ShipperDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\ProductServiceReference\ProductService.xsd">

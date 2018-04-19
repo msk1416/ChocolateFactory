@@ -49,6 +49,24 @@
   <wsdl:message name="IProductService_getPendingOrders_OutputMessage">
     <wsdl:part name="parameters" element="tns:getPendingOrdersResponse" />
   </wsdl:message>
+  <wsdl:message name="IProductService_getClients_InputMessage">
+    <wsdl:part name="parameters" element="tns:getClients" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getClients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getClientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:getProducts" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getShippers_InputMessage">
+    <wsdl:part name="parameters" element="tns:getShippers" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getShippers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getShippersResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProductService">
     <wsdl:operation name="requestOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/requestOrder" message="tns:IProductService_requestOrder_InputMessage" />
@@ -77,6 +95,18 @@
     <wsdl:operation name="getPendingOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getPendingOrders" message="tns:IProductService_getPendingOrders_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getPendingOrdersResponse" message="tns:IProductService_getPendingOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getClients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getClients" message="tns:IProductService_getClients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getClientsResponse" message="tns:IProductService_getClients_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getProducts" message="tns:IProductService_getProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getProductsResponse" message="tns:IProductService_getProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getShippers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getShippers" message="tns:IProductService_getShippers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getShippersResponse" message="tns:IProductService_getShippers_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProductService" type="tns:IProductService">
@@ -137,6 +167,33 @@
     </wsdl:operation>
     <wsdl:operation name="getPendingOrders">
       <soap:operation soapAction="http://tempuri.org/IProductService/getPendingOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClients">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getClients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProducts">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getShippers">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getShippers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

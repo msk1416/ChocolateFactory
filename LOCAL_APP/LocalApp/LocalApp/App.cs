@@ -58,6 +58,43 @@ namespace LocalApp
                     {
                         pl("Some error happened and the request could not be registered.");
                     }
+                } else if (op == 4)
+                {
+                    List<ClientDTO> clients = client.getClients().ToList();
+                    pl("Clients in database:");
+                    pl("Identifier, Name, City, Prefered format");
+                    pl("-------------------------------------");
+                    foreach (ClientDTO c in clients)
+                    {
+                        pl(c.ClientID + ", " + c.Name + ", " + c.City + ", " + c.PreferedFormat);
+                    }
+                } else if (op == 5)
+                {
+                    List<ProductDTO> products = client.getProducts().ToList();
+                    pl("Products in database:");
+                    pl("Identifier, Name, Type, Local stock, Price, Cost");
+                    pl("------------------------------------------------");
+                    foreach (ProductDTO p in products)
+                    {
+                        pl(p.ProductID + ", " + p.ProductName + ", " + p.Type + ", " + p.Quantity + ", " + p.Price + ", " + p.Cost);
+                    }
+                } else if (op == 6)
+                {
+                    List<ShipperDTO> shippers = client.getShippers().ToList();
+                    pl("Shippers in database:");
+                    pl("Identifier, Name, City, Cost per ton");
+                    pl("------------------------------------");
+                    foreach (ShipperDTO s in shippers)
+                    {
+                        pl(s.ShipperID + ", " + s.Name + ", " + s.City + ", " + s.CostPerTon);
+                    }
+                } else if (op == -1)
+                {
+                    client.Close();
+                    return;
+                } else
+                {
+                    pl("Please input a valid option.");
                 }
                 pl(" ");
                 printOptions();
@@ -83,6 +120,9 @@ namespace LocalApp
             Console.WriteLine(" 1 - Print all orders ");
             Console.WriteLine(" 2 - Print all pending orders");
             Console.WriteLine(" 3 - Request an order");
+            Console.WriteLine(" 4 - Print all clients");
+            Console.WriteLine(" 5 - Print all products");
+            Console.WriteLine(" 6 - Print all shippers");
             Console.WriteLine(" -1 - Exit the application");
             Console.Write("> ");
         }
