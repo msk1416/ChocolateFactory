@@ -43,5 +43,10 @@ namespace LocalAppUWP
             base.OnNavigatedTo(e);
 
         }
+
+        private void productsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

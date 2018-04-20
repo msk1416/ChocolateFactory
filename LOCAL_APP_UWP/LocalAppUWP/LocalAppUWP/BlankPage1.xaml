@@ -8,11 +8,18 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel>
-            <TextBlock HorizontalAlignment="Center" Text="Enter your name"/>
-            <TextBox HorizontalAlignment="Center" Width="200" Name="name" />
-            <HyperlinkButton Content="Click to go to page 2" Click="HyperlinkButton_Click" HorizontalAlignment="Center"/>
-        </StackPanel>
+
         <HyperlinkButton Content="Go to page 2" Click="HyperlinkButton_Click" HorizontalAlignment="Center"/>
+        <StackPanel>
+            <ListView x:Name="productsList" Width="700"  Height="718" Margin="0,0,734,0">
+                <ListView.BorderBrush>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="Black" Offset="1"/>
+                        <GradientStop Color="#FE000000" Offset="0.427"/>
+                    </LinearGradientBrush>
+                </ListView.BorderBrush>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Page>
