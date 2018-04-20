@@ -20,6 +20,25 @@ namespace HQService
 
         [OperationContract]
         bool logLocalOrder(int orderId, int localClientId, int productId, String date, int quantity, int localShipperId, bool isAccepted);
+
+        [OperationContract]
+        bool dismissStockOrder(int orderId);
+
+        [OperationContract]
+        List<ProductStockDTO> getProductStocks();
+
+        [OperationContract]
+        List<PendingStockOrderDTO> getPendingStockOrders();
+
+        [OperationContract]
+        List<BranchDTO> getBranches();
+
+        [OperationContract]
+        List<OrdersLogDTO> getOrdersLogs();
+
+        [OperationContract]
+        List<StockOrderLogDTO> getStockOrderLogs();
+        
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.

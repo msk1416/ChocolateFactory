@@ -81,9 +81,12 @@ namespace ProductService
                 PendingOrder po = ctx.PendingOrders.Find(orderId);
                 HQServiceReference.HQServiceClient client =
                     new HQServiceReference.HQServiceClient();
+                
                 bool logRet =
                     client.logLocalOrder(po.OrderID, po.ClientID, po.ProductID, po.Date.ToShortDateString(), po.Quantity, po.ShipperID, false);
-                return logRet;
+                ctx.PendingOrders.Remove(po);
+                int ret = ctx.SaveChanges();
+                return logRet && ret > 0;
             }
         }
 
