@@ -75,6 +75,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="HQDTOs.cs" />
     <Compile Include="IHQService.cs" />
     <Compile Include="OrdersLog.cs">
       <DependentUpon>ChocolateCoHQEntitiesModel.tt</DependentUpon>

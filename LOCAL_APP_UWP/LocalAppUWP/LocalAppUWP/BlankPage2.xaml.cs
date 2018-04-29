@@ -29,7 +29,7 @@ namespace LocalAppUWP
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(BlankPage1));
+            this.Frame.Navigate(typeof(RequestPage));
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -41,6 +41,11 @@ namespace LocalAppUWP
                 greeting.Text = "Hi!";
             }
             base.OnNavigatedTo(e);
+
+        }
+
+        private void productsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }
