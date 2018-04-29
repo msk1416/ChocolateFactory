@@ -45,6 +45,9 @@ namespace ProductService
             }
         }
 
+
+
+
         public bool deliverStock(int productId, int quantity)
         {
             using (var ctx = new ChocolateStoreUkEntities2())
