@@ -29,7 +29,8 @@ namespace LocalAppUWP
         ObservableCollection<ClientDTO> clients = new ObservableCollection<ClientDTO>();
         ObservableCollection<ShipperDTO> shippers = new ObservableCollection<ShipperDTO>();
         String selectedProduct;
-        String prevProduct;
+        String selectedClient;
+        String selectedShipper;
         int prevSelected = -1;
         int indexSelected = -1;
         public RequestPage()
@@ -84,6 +85,7 @@ namespace LocalAppUWP
                     currentSelectionText.Visibility = Visibility.Visible;
                     currentSelectionPlaceholder.Text = item.Text;
                     currentSelectionPlaceholder.Visibility = Visibility.Visible;
+                    selectedClient = item.Text;
                 };
 
                 menuFlyoutClients.Items.Add(item);
@@ -106,6 +108,7 @@ namespace LocalAppUWP
                     currentSelectedShipperText.Visibility = Visibility.Visible;
                     currentSelectedShipperPlaceholder.Text = item.Text;
                     currentSelectedShipperPlaceholder.Visibility = Visibility.Visible;
+                    selectedShipper = item.Text;
                 };
 
                 menuFlyoutShippers.Items.Add(item);
@@ -124,44 +127,17 @@ namespace LocalAppUWP
         {
 
             if (indexSelected == -1)
+            {
                 InitialText.Visibility = Visibility.Collapsed;
-            resetPage(generateTitle(e.ClickedItem.ToString()));
-            /*if (prevSelected != indexSelected && prevSelected != -1)
-            {
-                if (shouldAlertUser())
-                {
-                   showAlertPopupAsync(e.ClickedItem.ToString());
-                } else
-                {
-                    resetPage(e.ClickedItem.ToString());
-                    prevSelected = indexSelected;
-                }
-            } else if (prevSelected == -1)
-            {
-                resetPage(generateTitle(e.ClickedItem.ToString()));
-            }/*
-            //requestTitle.Text = generateTitle();
-            if (indexSelected >= 0 && shouldAlertUser())
-            {
-                showAlertPopupAsync(e.ClickedItem.ToString());
-            } else if (selectedProduct == null)
-            {
-                resetPage(e.ClickedItem.ToString());
                 selectedProduct = e.ClickedItem.ToString();
-                indexSelected = e.ClickedItem
-            }*/
+            }
+            resetPage(generateTitle(e.ClickedItem.ToString()));
+
         }
 
         private void productsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {/*
-            if (prevSelected == -1 && indexSelected == -1)
-            {
-                indexSelected = productsListView.SelectedIndex;
-            } else
-            {
-                prevSelected = indexSelected;
-                indexSelected = productsListView.SelectedIndex;
-            }*/
+        {
+
         }
 
         private async void showAlertPopupAsync(String newProduct)
@@ -238,7 +214,29 @@ namespace LocalAppUWP
 
         private void SendRequestBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (checkEnteredData())
+            {
+                //valid request
+                
+            }
+            else
+            {
+                //invalid request
+                lblError.Visibility = Visibility.Visible;
+            }
+        }
+        //return true if entered data is valid
+        private bool checkEnteredData()
+        {
+            bool valid = true;
+            int tmp = 0;
+            valid &= (int.TryParse(quantity.Text, out tmp));
+            valid &= !(selectedClient is null);
+            valid &= !(selectedProduct is null);
+            valid &= !(selectedShipper is null);
+            valid &= (DateTime.Compare(programmedDate.Date.Value.Date, DateTime.Now) > 0);
+            //valid &= (programmedDate.Date.Value.CompareTo(DateTime.Now.Date) > 0);
+            return valid;
         }
 
         private bool shouldAlertUser()
@@ -265,6 +263,9 @@ namespace LocalAppUWP
             currentSelectedShipperText.Visibility = Visibility.Collapsed;
             currentSelectedShipperPlaceholder.Visibility = Visibility.Collapsed;
             requestContentStackPanel.Visibility = Visibility.Visible;
+            selectedShipper = null;
+            selectedClient = null;
+            lblError.Visibility = Visibility.Collapsed;
         }
 
         private String generateTitle(String product)

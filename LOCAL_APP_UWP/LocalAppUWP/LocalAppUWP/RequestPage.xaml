@@ -62,9 +62,10 @@
                         <TextBlock x:Name="currentSelectedShipperPlaceholder" VerticalAlignment="Center" FontSize="24" Margin="20,0,0,0"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="btnsStackPanel" Margin="0,10,0,10">
-                        <Button FontSize="30" Click="SendRequestBtn_Click" Margin="0,0,10,0">Send request</Button>
+                        <Button FontSize="30" x:Name="sendReqBtn" Click="SendRequestBtn_Click" Margin="0,0,10,0">Send request</Button>
                         <Button FontSize="30" Click="ClearFieldsBtn_Click" Margin="10,0,0,0">Clear</Button>
                     </StackPanel>
+                    <TextBlock x:Name="lblError" VerticalAlignment="Center" FontSize="14" Text="Enter data is not valid, please check your order again." Foreground="Red" Visibility="Collapsed"/>
                 </StackPanel>
                 <TextBlock x:Name="InitialText" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Select a product to start an order" Margin="0,170,0,0" Foreground="Gray" Visibility="Visible"/>
             </StackPanel>
