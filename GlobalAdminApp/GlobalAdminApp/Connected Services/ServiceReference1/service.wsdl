@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HQServiceClass" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/HQService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IHQService_requestStockHQ_InputMessage">
+    <wsdl:part name="parameters" element="tns:requestStockHQ" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_requestStockHQ_OutputMessage">
+    <wsdl:part name="parameters" element="tns:requestStockHQResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_acceptStockRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:acceptStockRequest" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_acceptStockRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:acceptStockRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_logLocalOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:logLocalOrder" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_logLocalOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:logLocalOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_dismissStockOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:dismissStockOrder" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_dismissStockOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:dismissStockOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_getProductStocks_InputMessage">
+    <wsdl:part name="parameters" element="tns:getProductStocks" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_getProductStocks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getProductStocksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_getPendingStockOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:getPendingStockOrders" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_getPendingStockOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getPendingStockOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_getBranches_InputMessage">
+    <wsdl:part name="parameters" element="tns:getBranches" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_getBranches_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getBranchesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_getOrdersLogs_InputMessage">
+    <wsdl:part name="parameters" element="tns:getOrdersLogs" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_getOrdersLogs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getOrdersLogsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_getStockOrderLogs_InputMessage">
+    <wsdl:part name="parameters" element="tns:getStockOrderLogs" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_getStockOrderLogs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getStockOrderLogsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IHQService">
+    <wsdl:operation name="requestStockHQ">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/requestStockHQ" message="tns:IHQService_requestStockHQ_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/requestStockHQResponse" message="tns:IHQService_requestStockHQ_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="acceptStockRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/acceptStockRequest" message="tns:IHQService_acceptStockRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/acceptStockRequestResponse" message="tns:IHQService_acceptStockRequest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="logLocalOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/logLocalOrder" message="tns:IHQService_logLocalOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/logLocalOrderResponse" message="tns:IHQService_logLocalOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="dismissStockOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/dismissStockOrder" message="tns:IHQService_dismissStockOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/dismissStockOrderResponse" message="tns:IHQService_dismissStockOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getProductStocks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/getProductStocks" message="tns:IHQService_getProductStocks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/getProductStocksResponse" message="tns:IHQService_getProductStocks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getPendingStockOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/getPendingStockOrders" message="tns:IHQService_getPendingStockOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/getPendingStockOrdersResponse" message="tns:IHQService_getPendingStockOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getBranches">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/getBranches" message="tns:IHQService_getBranches_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/getBranchesResponse" message="tns:IHQService_getBranches_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrdersLogs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/getOrdersLogs" message="tns:IHQService_getOrdersLogs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/getOrdersLogsResponse" message="tns:IHQService_getOrdersLogs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getStockOrderLogs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/getStockOrderLogs" message="tns:IHQService_getStockOrderLogs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/getStockOrderLogsResponse" message="tns:IHQService_getStockOrderLogs_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IHQService" type="tns:IHQService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="requestStockHQ">
+      <soap:operation soapAction="http://tempuri.org/IHQService/requestStockHQ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="acceptStockRequest">
+      <soap:operation soapAction="http://tempuri.org/IHQService/acceptStockRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logLocalOrder">
+      <soap:operation soapAction="http://tempuri.org/IHQService/logLocalOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dismissStockOrder">
+      <soap:operation soapAction="http://tempuri.org/IHQService/dismissStockOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProductStocks">
+      <soap:operation soapAction="http://tempuri.org/IHQService/getProductStocks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPendingStockOrders">
+      <soap:operation soapAction="http://tempuri.org/IHQService/getPendingStockOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBranches">
+      <soap:operation soapAction="http://tempuri.org/IHQService/getBranches" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrdersLogs">
+      <soap:operation soapAction="http://tempuri.org/IHQService/getOrdersLogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStockOrderLogs">
+      <soap:operation soapAction="http://tempuri.org/IHQService/getStockOrderLogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HQServiceClass">
+    <wsdl:port name="BasicHttpBinding_IHQService" binding="tns:BasicHttpBinding_IHQService">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

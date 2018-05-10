@@ -1,0 +1,21 @@
+﻿<Page
+    x:Class="GlobalAdminApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GlobalAdminApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,306,160">
+        <Button x:Name="RefreshOrdersButton" Content="Refresh Orders" HorizontalAlignment="Left" Margin="253,422,0,0" VerticalAlignment="Top" Click="RefreshOrders_Click"/>
+        <ListView x:Name="pendingOrdersListView" HorizontalAlignment="Left" Height="287" Margin="98,114,0,0" VerticalAlignment="Top" Width="483"/>
+        <ListView HorizontalAlignment="Left" Height="100" Margin="551,131,0,0" VerticalAlignment="Top" Width="100"/>
+        <ListView x:Name="StockOrdersListView" HorizontalAlignment="Left" Height="287" Margin="651,114,0,0" VerticalAlignment="Top" Width="483"/>
+        <Button x:Name="AcceptStockRequestButton" Content="Accept Stock Request" HorizontalAlignment="Left" Margin="229,530,0,0" VerticalAlignment="Top" Width="168" Click="AcceptStockRequestButton_Click" />
+        <Button x:Name="DismissStockRequestButton" Content="Dismiss Stock Request" HorizontalAlignment="Left" Margin="229,584,0,0" VerticalAlignment="Top" Width="168"/>
+        <TextBlock x:Name="PendingOrdersTextBlock" HorizontalAlignment="Left" Margin="253,53,0,0" Text="Pending Orders" TextWrapping="Wrap" VerticalAlignment="Top" />
+        <TextBlock x:Name="StockOrdersTextBlock" HorizontalAlignment="Left" Margin="813,57,0,0" Text="Stock Orders" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="27" />
+
+    </Grid>
+</Page>
