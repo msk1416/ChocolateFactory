@@ -19,7 +19,7 @@ namespace ProductService
         bool acceptOrder(int orderId);
 
         [OperationContract]
-        bool dismissOrder(int orderId);
+        bool dismissOrder(int orderId, string justification);
 
         [OperationContract]
         bool deliverStock(int productId, int quantity);

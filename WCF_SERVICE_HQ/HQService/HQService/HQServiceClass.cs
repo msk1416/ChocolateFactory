@@ -52,7 +52,7 @@ namespace HQService
             }
         }
 
-        public bool logLocalOrder(int orderId, int localClientId, int productId, string date, int quantity, int localShipperId, bool isAccepted)
+        public bool logLocalOrder(int orderId, int localClientId, int productId, string date, int quantity, int localShipperId, bool isAccepted, string justification)
         {
             using (var ctx = new ChocolateCoHQEntities1())
             {
@@ -64,6 +64,7 @@ namespace HQService
                 ol.Quantity = quantity;
                 ol.LocalShipperID = localShipperId;
                 ol.Accepted = (short)(isAccepted ? 1 : 0);
+                ol.Justification = justification;
                 ctx.OrdersLog.Add(ol);
                 int ret = ctx.SaveChanges();
                 return (ret > 0);

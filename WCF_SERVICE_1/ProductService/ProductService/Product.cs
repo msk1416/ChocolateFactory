@@ -18,6 +18,7 @@ namespace ProductService
         public Product()
         {
             this.Orders = new HashSet<Order>();
+            this.PendingOrders = new HashSet<PendingOrder>();
         }
     
         public int ProductID { get; set; }
@@ -29,5 +30,7 @@ namespace ProductService
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PendingOrder> PendingOrders { get; set; }
     }
 }

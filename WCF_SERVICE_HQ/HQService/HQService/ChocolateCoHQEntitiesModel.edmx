@@ -23,6 +23,7 @@
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="LocalShipperID" Type="int" Nullable="false" />
           <Property Name="Accepted" Type="smallint" Nullable="false" />
+          <Property Name="Justification" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="PendingStockOrders">
           <Key>
@@ -98,6 +99,7 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="LocalShipperID" Type="Int32" Nullable="false" />
           <Property Name="Accepted" Type="Int16" Nullable="false" />
+          <Property Name="Justification" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="ChocolateCoHQEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Branches" EntityType="Self.Branches" />
@@ -152,6 +154,7 @@
           <EntitySetMapping Name="OrdersLog">
             <EntityTypeMapping TypeName="ChocolateCoHQModel.OrdersLog">
               <MappingFragment StoreEntitySet="OrdersLog">
+                <ScalarProperty Name="Justification" ColumnName="Justification" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="LocalClientID" ColumnName="LocalClientID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />

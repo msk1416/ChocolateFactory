@@ -13,6 +13,10 @@
         <AssociationConnector Association="ChocolateStoreUkModel.FK_Orders_Clients" ManuallyRouted="false" />
         <AssociationConnector Association="ChocolateStoreUkModel.FK_Orders_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ChocolateStoreUkModel.FK_Orders_Shippers" ManuallyRouted="false" />
+        <AssociationConnector Association="ChocolateStoreUkModel.FK_PendingOrders_Clients" />
+        <AssociationConnector Association="ChocolateStoreUkModel.FK_Orders_Shippers1" />
+        <AssociationConnector Association="ChocolateStoreUkModel.FK_PendingOrders_Products" />
+        <AssociationConnector Association="ChocolateStoreUkModel.FK_PendingOrders_Shippers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

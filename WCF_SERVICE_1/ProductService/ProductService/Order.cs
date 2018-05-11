@@ -20,9 +20,12 @@ namespace ProductService
         public int Quantity { get; set; }
         public System.DateTime Date { get; set; }
         public int ShipperID { get; set; }
+        public byte Accepted { get; set; }
+        public string Justification { get; set; }
     
         public virtual Client Client { get; set; }
         public virtual Product Product { get; set; }
         public virtual Shipper Shipper { get; set; }
+        public virtual Shipper Shipper1 { get; set; }
     }
 }
