@@ -98,6 +98,8 @@
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PrintableOrdersCollection.cs" />
+    <Compile Include="PrintableOrder.cs" />
     <Compile Include="ProductViewModel.cs" />
     <Compile Include="RequestPage.xaml.cs">
       <DependentUpon>RequestPage.xaml</DependentUpon>

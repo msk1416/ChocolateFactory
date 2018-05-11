@@ -49,6 +49,18 @@
   <wsdl:message name="IProductService_getPendingOrders_OutputMessage">
     <wsdl:part name="parameters" element="tns:getPendingOrdersResponse" />
   </wsdl:message>
+  <wsdl:message name="IProductService_getOrdersByClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:getOrdersByClient" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getOrdersByClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getOrdersByClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getPendingOrdersByClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:getPendingOrdersByClient" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getPendingOrdersByClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getPendingOrdersByClientResponse" />
+  </wsdl:message>
   <wsdl:message name="IProductService_getClients_InputMessage">
     <wsdl:part name="parameters" element="tns:getClients" />
   </wsdl:message>
@@ -95,6 +107,14 @@
     <wsdl:operation name="getPendingOrders">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getPendingOrders" message="tns:IProductService_getPendingOrders_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getPendingOrdersResponse" message="tns:IProductService_getPendingOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrdersByClient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getOrdersByClient" message="tns:IProductService_getOrdersByClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getOrdersByClientResponse" message="tns:IProductService_getOrdersByClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getPendingOrdersByClient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getPendingOrdersByClient" message="tns:IProductService_getPendingOrdersByClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getPendingOrdersByClientResponse" message="tns:IProductService_getPendingOrdersByClient_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getClients">
       <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getClients" message="tns:IProductService_getClients_InputMessage" />
@@ -167,6 +187,24 @@
     </wsdl:operation>
     <wsdl:operation name="getPendingOrders">
       <soap:operation soapAction="http://tempuri.org/IProductService/getPendingOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrdersByClient">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getOrdersByClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPendingOrdersByClient">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getPendingOrdersByClient" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

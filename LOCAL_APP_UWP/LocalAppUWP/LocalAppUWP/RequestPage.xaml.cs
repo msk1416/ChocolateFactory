@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using LocalAppUWP.ProductServiceReference;
 using System.Collections.ObjectModel;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,16 +29,21 @@ namespace LocalAppUWP
         ObservableCollection<ProductDTO> products = new ObservableCollection<ProductDTO>();
         ObservableCollection<ClientDTO> clients = new ObservableCollection<ClientDTO>();
         ObservableCollection<ShipperDTO> shippers = new ObservableCollection<ShipperDTO>();
+        ObservableCollection<PrintableOrder> orders = new ObservableCollection<PrintableOrder>();
         String selectedProduct;
         String loggedClientName;
         int loggedClientId;
         String selectedShipper;
         int prevSelected = -1;
         int indexSelected = -1;
+        bool needUpdateOrders = false;
+        ObservableCollection<int> containedOrderIds = new ObservableCollection<int>();
         private string defaultLblSuccessText = "Order request was a success, new ID is ---- . Feel free to request more products.";
         public RequestPage()
         {
             this.InitializeComponent();
+            ApplicationView.PreferredLaunchViewSize = new Size(900, 1440);
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
         }
 
 
@@ -51,11 +57,21 @@ namespace LocalAppUWP
 
         }
 
+        public string getProductNameById(int id)
+        {
+            ProductDTO p = products.FirstOrDefault(pr => pr.ProductID == id);
+            return p.ProductName.Trim() + " " + p.Type.Trim();
+        }
+
+        public string getShipperNameById(int id)
+        {
+            return shippers.FirstOrDefault(s => s.ShipperID == id).Name.Trim();
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             populateProductsList();
-            //populateClientsList();
             populateShippersList();
             programmedDate.MinDate = DateTime.Now;
             loggedClientName = ((ClientDTO)e.Parameter).Name;
@@ -72,32 +88,71 @@ namespace LocalAppUWP
             {
                 productsListView.Items.Add("[" + p.ProductID + "] " + p.Type.Trim() + " " + p.ProductName.Trim());
             }
-            client.CloseAsync();
+            await client.CloseAsync();
         }
-        /*
-        private async void populateClientsList()
-        {
-            clientDropDown.IsEnabled = false;
-            ProductServiceClient client
-                = new ProductServiceClient();
-            clients = await client.getClientsAsync();
-            foreach (ClientDTO c in clients)
-            {
-                MenuFlyoutItem item = new MenuFlyoutItem();
-                item.Text = "[" + c.ClientID + "] " + c.Name;
-                item.Click += (s, e1) =>
-                {
-                    currentSelectedClientText.Visibility = Visibility.Visible;
-                    currentSelectedClientPlaceholder.Text = item.Text;
-                    currentSelectedClientPlaceholder.Visibility = Visibility.Visible;
-                    loggedClientName = item.Text;
-                };
 
-                menuFlyoutClients.Items.Add(item);
+        private async void loadOrders()
+        {
+            if (orders == null)
+            {
+                ProductServiceClient client = new ProductServiceClient();
+                ObservableCollection<OrderDTO> tmp = new ObservableCollection<OrderDTO>();
+                orders = new ObservableCollection<PrintableOrder>();
+                tmp = await client.getOrdersByClientAsync(loggedClientId);
+                string prodN, shippN;
+                foreach (OrderDTO o in tmp)
+                {
+                    prodN = getProductNameById(o.ProductID);
+                    shippN = getShipperNameById(o.ShipperID);
+                    orders.Add(new PrintableOrder(o, prodN, shippN));
+                    containedOrderIds.Add(o.OrderID);
+                }
+                ObservableCollection<PendingOrderDTO> pos = new ObservableCollection<PendingOrderDTO>();
+                pos = await client.getPendingOrdersByClientAsync(loggedClientId);
+                foreach (PendingOrderDTO po in pos)
+                {
+                    prodN = getProductNameById(po.ProductID);
+                    shippN = getShipperNameById(po.ShipperID);
+                    orders.Add(new PrintableOrder(po, prodN, shippN));
+                    containedOrderIds.Add(po.OrderID);
+                }
+                //ordersListView.ItemsSource = orders;
+                await client.CloseAsync();
+            } else
+            {
+                //only loading new orders into current collection
+                ProductServiceClient client = new ProductServiceClient();
+                ObservableCollection<OrderDTO> tmp = new ObservableCollection<OrderDTO>();
+                tmp = await client.getOrdersByClientAsync(loggedClientId);
+                string prodN, shippN;
+                foreach (OrderDTO o in tmp)
+                {
+                    if (!containedOrderIds.Contains(o.OrderID))
+                    {
+                        prodN = getProductNameById(o.ProductID);
+                        shippN = getShipperNameById(o.ShipperID);
+                        orders.Add(new PrintableOrder(o, prodN, shippN));
+                        containedOrderIds.Add(o.OrderID);
+                    }
+                }
+
+                ObservableCollection<PendingOrderDTO> tmp2 = new ObservableCollection<PendingOrderDTO>();
+                tmp2 = await client.getPendingOrdersByClientAsync(loggedClientId);
+                foreach (PendingOrderDTO o in tmp2)
+                {
+                    if (!containedOrderIds.Contains(o.OrderID))
+                    {
+                        prodN = getProductNameById(o.ProductID);
+                        shippN = getShipperNameById(o.ShipperID);
+                        orders.Add(new PrintableOrder(o, prodN, shippN));
+                        containedOrderIds.Add(o.OrderID);
+                    }
+                }
             }
-            clientDropDown.IsEnabled = true;
         }
-        */
+
+
+
         private async void populateShippersList()
         {
             shippersDropDown.IsEnabled = false;
@@ -119,15 +174,11 @@ namespace LocalAppUWP
                 menuFlyoutShippers.Items.Add(item);
             }
             shippersDropDown.IsEnabled = true;
+            loadOrders();
         }
-        /*
-        private void onClientItemClick(object sender, EventArgs e)
-        {
-            currentSelectedClientText.Visibility = Visibility.Visible;
-            currentSelectedClientPlaceholder.Text = e.ToString();
-            currentSelectedClientPlaceholder.Visibility = Visibility.Visible;
-        }
-        */
+
+
+
         private void productsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
 
@@ -237,6 +288,16 @@ namespace LocalAppUWP
                     lblSuccess.Text = defaultLblSuccessText.Replace("----", ret.ToString());
                     lblSuccess.Visibility = Visibility.Visible;
                     lblError.Visibility = Visibility.Collapsed;
+                    //loadOrders();
+                    PendingOrderDTO po = new PendingOrderDTO();
+                    po.OrderID = ret;
+                    po.ProductID = productId;
+                    po.ShipperID = shipperId;
+                    po.Quantity = quantity;
+                    po.Date = selectedDate.Date;
+                    po.ClientID = loggedClientId;
+                    orders.Add(new PrintableOrder(po, getProductNameById(productId), getShipperNameById(shipperId)));
+                    needUpdateOrders = true;
                 }
                     
             }
@@ -329,7 +390,18 @@ namespace LocalAppUWP
                 requestStackPanel.Visibility = Visibility.Collapsed;
                 optionsWindow.Visibility = Visibility.Visible;
                 productsListView.SelectedIndex = -1;
+                if (orders == null || orders.Count < 1)
+                {
+                    loadOrders();
+                }
+                    
             }
+        }
+
+        private void refreshBtn_Click(object sender, RoutedEventArgs e)
+        {
+            orders = null;
+            loadOrders();
         }
     }
 }
