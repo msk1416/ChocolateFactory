@@ -72,7 +72,7 @@
                     <TextBlock x:Name="InitialText" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Select a product to start an order" Margin="0,170,0,0" Foreground="Gray" Visibility="Visible"/>
                 </StackPanel>
                 <StackPanel x:Name="optionsWindow" Visibility="Collapsed">
-                    <TextBlock FontSize="40" FontWeight="Bold">Your orders</TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Name="ordersTitle" Padding="0,20,0,0" FontSize="40" Margin="0,10,0,0" Text="Your orders" TextWrapping="Wrap" VerticalAlignment="Top" Height="102" Width="887"/>
                 </StackPanel>
             </StackPanel>
         </SplitView.Content>
