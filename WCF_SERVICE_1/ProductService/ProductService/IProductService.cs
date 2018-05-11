@@ -34,6 +34,12 @@ namespace ProductService
         List<PendingOrderDTO> getPendingOrders();
 
         [OperationContract]
+        List<OrderDTO> getOrdersByClient(int clientId);
+
+        [OperationContract]
+        List<PendingOrderDTO> getPendingOrdersByClient(int clientId);
+
+        [OperationContract]
         List<ClientDTO> getClients();
 
         [OperationContract]

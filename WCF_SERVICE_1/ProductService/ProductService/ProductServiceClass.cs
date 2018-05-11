@@ -122,6 +122,8 @@ namespace ProductService
             ret.ProductID = o.ProductID;
             ret.Quantity = o.Quantity;
             ret.ShipperID = o.ShipperID;
+            ret.Accepted = o.Accepted;
+            ret.Justification = o.Justification;
             return ret;
         }
 
@@ -233,6 +235,34 @@ namespace ProductService
                 foreach (Shipper s in shippers)
                 {
                     list.Add(DTO(s));
+                }
+                return list;
+            }
+        }
+
+        public List<OrderDTO> getOrdersByClient(int clientId)
+        {
+            List<OrderDTO> list = new List<OrderDTO>();
+            using (var ctx = new ChocolateStoreUkEntities2())
+            {
+                IEnumerable<Order> orders = ctx.Orders.Where(o => o.ClientID == clientId);
+                foreach (Order o in orders)
+                {
+                    list.Add(DTO(o));
+                }
+                return list;
+            }
+        }
+
+        public List<PendingOrderDTO> getPendingOrdersByClient(int clientId)
+        {
+            List<PendingOrderDTO> list = new List<PendingOrderDTO>();
+            using (var ctx = new ChocolateStoreUkEntities2())
+            {
+                IEnumerable<PendingOrder> orders = ctx.PendingOrders.Where(o => o.ClientID == clientId);
+                foreach (PendingOrder po in orders)
+                {
+                    list.Add(DTO(po));
                 }
                 return list;
             }

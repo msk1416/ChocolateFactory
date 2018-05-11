@@ -21,6 +21,10 @@ namespace ProductService
         public System.DateTime Date { get; set; }
         [DataMember]
         public int ShipperID { get; set; }
+        [DataMember]
+        public int Accepted { get; set; }
+        [DataMember]
+        public string Justification { get; set; }
     }
     [DataContract]
     public class PendingOrderDTO
@@ -37,6 +41,7 @@ namespace ProductService
         public System.DateTime Date { get; set; }
         [DataMember]
         public int ShipperID { get; set; }
+
     }
 
     [DataContract]
