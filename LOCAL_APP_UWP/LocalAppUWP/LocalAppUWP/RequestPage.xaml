@@ -66,7 +66,7 @@
                         <Button FontSize="30" Click="ClearFieldsBtn_Click" Margin="10,0,0,0">Clear</Button>
                     </StackPanel>
                     <TextBlock x:Name="lblError" VerticalAlignment="Center" FontSize="14" Text="Entered data is not valid, please check your order again." Foreground="Red" Visibility="Collapsed"/>
-                    <TextBlock x:Name="lblSuccess" VerticalAlignment="Center" FontSize="14" Text="Order request was a success. Feel free to request more products." Foreground="Green" Visibility="Collapsed"/>
+                    <TextBlock x:Name="lblSuccess" VerticalAlignment="Center" FontSize="14" Text="Order request was a success, new ID is ----. Feel free to request more products." Foreground="Green" Visibility="Collapsed"/>
                 </StackPanel>
                 <TextBlock x:Name="InitialText" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Select a product to start an order" Margin="0,170,0,0" Foreground="Gray" Visibility="Visible"/>
             </StackPanel>

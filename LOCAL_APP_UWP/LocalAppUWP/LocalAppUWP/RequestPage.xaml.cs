@@ -33,6 +33,7 @@ namespace LocalAppUWP
         String selectedShipper;
         int prevSelected = -1;
         int indexSelected = -1;
+        private string defaultLblSuccessText = "Order request was a success, new ID is ---- . Feel free to request more products.";
         public RequestPage()
         {
             this.InitializeComponent();
@@ -228,6 +229,8 @@ namespace LocalAppUWP
                 int ret = await client.requestOrderAsync(clientId, productId, quantity, selectedDate.Date.ToString("dd/MM/yyyy"), shipperId);
                 if (ret > 0)
                 {
+                    //returned value is the new id
+                    lblSuccess.Text = defaultLblSuccessText.Replace("----", ret.ToString());
                     lblSuccess.Visibility = Visibility.Visible;
                     lblError.Visibility = Visibility.Collapsed;
                 }
@@ -291,6 +294,8 @@ namespace LocalAppUWP
             selectedShipper = null;
             selectedClient = null;
             lblError.Visibility = Visibility.Collapsed;
+            lblSuccess.Text = defaultLblSuccessText;
+            lblSuccess.Visibility = Visibility.Collapsed;
         }
 
         private String generateTitle(String product)
