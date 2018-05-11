@@ -137,7 +137,8 @@ namespace LocalAppUWP
                 selectedProduct = retrieveName(e.ClickedItem.ToString());
             }
             resetPage(generateTitle(retrieveName(e.ClickedItem.ToString())));
-
+            if (requestStackPanel.Visibility == Visibility.Collapsed)
+                switchWindow();
         }
 
         private void productsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -308,11 +309,26 @@ namespace LocalAppUWP
         {
             if (e.ClickedItem.ToString().Equals("View my orders"))
             {
-                requestStackPanel.Visibility = Visibility.Collapsed;
-                optionsWindow.Visibility = Visibility.Visible;
+                if (requestStackPanel.Visibility == Visibility.Visible)
+                    switchWindow();
             } else if (e.ClickedItem.ToString().Equals("Log out"))
             {
                 this.Frame.Navigate(typeof(LoginPage));
+            }
+        }
+
+        private void switchWindow()
+        {
+            if (requestStackPanel.Visibility == Visibility.Collapsed)
+            {
+                requestStackPanel.Visibility = Visibility.Visible;
+                optionsWindow.Visibility = Visibility.Collapsed;
+                listViewOptions.SelectedIndex = -1;
+            } else
+            {
+                requestStackPanel.Visibility = Visibility.Collapsed;
+                optionsWindow.Visibility = Visibility.Visible;
+                productsListView.SelectedIndex = -1;
             }
         }
     }
