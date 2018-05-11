@@ -308,7 +308,8 @@ namespace LocalAppUWP
         {
             if (e.ClickedItem.ToString().Equals("View my orders"))
             {
-
+                requestStackPanel.Visibility = Visibility.Collapsed;
+                optionsWindow.Visibility = Visibility.Visible;
             } else if (e.ClickedItem.ToString().Equals("Log out"))
             {
                 this.Frame.Navigate(typeof(LoginPage));
