@@ -65,7 +65,7 @@ namespace LocalAppUWP
             products = await client.getProductsAsync();
             foreach (ProductDTO p in products)
             {
-                productsListView.Items.Add(p.Type.Trim() + " " + p.ProductName.Trim());
+                productsListView.Items.Add("[" + p.ProductID + "] " + p.Type.Trim() + " " + p.ProductName.Trim());
             }
             client.CloseAsync();
         }
@@ -79,12 +79,12 @@ namespace LocalAppUWP
             foreach (ClientDTO c in clients)
             {
                 MenuFlyoutItem item = new MenuFlyoutItem();
-                item.Text = c.Name;
+                item.Text = "[" + c.ClientID + "] " + c.Name;
                 item.Click += (s, e1) =>
                 {
-                    currentSelectionText.Visibility = Visibility.Visible;
-                    currentSelectionPlaceholder.Text = item.Text;
-                    currentSelectionPlaceholder.Visibility = Visibility.Visible;
+                    currentSelectedClientText.Visibility = Visibility.Visible;
+                    currentSelectedClientPlaceholder.Text = item.Text;
+                    currentSelectedClientPlaceholder.Visibility = Visibility.Visible;
                     selectedClient = item.Text;
                 };
 
@@ -102,7 +102,7 @@ namespace LocalAppUWP
             foreach (ShipperDTO sh in shippers)
             {
                 MenuFlyoutItem item = new MenuFlyoutItem();
-                item.Text = sh.Name;
+                item.Text = "[" + sh.ShipperID + "] " + sh.Name;
                 item.Click += (s, e1) =>
                 {
                     currentSelectedShipperText.Visibility = Visibility.Visible;
@@ -118,9 +118,9 @@ namespace LocalAppUWP
 
         private void onClientItemClick(object sender, EventArgs e)
         {
-            currentSelectionText.Visibility = Visibility.Visible;
-            currentSelectionPlaceholder.Text = e.ToString();
-            currentSelectionPlaceholder.Visibility = Visibility.Visible;
+            currentSelectedClientText.Visibility = Visibility.Visible;
+            currentSelectedClientPlaceholder.Text = e.ToString();
+            currentSelectedClientPlaceholder.Visibility = Visibility.Visible;
         }
 
         private void productsListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -129,9 +129,9 @@ namespace LocalAppUWP
             if (indexSelected == -1)
             {
                 InitialText.Visibility = Visibility.Collapsed;
-                selectedProduct = e.ClickedItem.ToString();
+                selectedProduct = retrieveName(e.ClickedItem.ToString());
             }
-            resetPage(generateTitle(e.ClickedItem.ToString()));
+            resetPage(generateTitle(retrieveName(e.ClickedItem.ToString())));
 
         }
 
@@ -212,12 +212,26 @@ namespace LocalAppUWP
             resetPage(generateTitle(productsListView.SelectedItem.ToString()));
         }
 
-        private void SendRequestBtn_Click(object sender, RoutedEventArgs e)
+        private async void SendRequestBtn_Click(object sender, RoutedEventArgs e)
         {
             if (checkEnteredData())
             {
                 //valid request
-                
+                int clientId = retrieveID(currentSelectedClientPlaceholder.Text);
+                int shipperId = retrieveID(currentSelectedShipperPlaceholder.Text);
+                int quantity = Int32.Parse(quantityInputBox.Text);
+                int productId = retrieveID(productsListView.SelectedItem.ToString());
+                DateTime selectedDate = 
+                    (todayCBox.IsChecked.Value) ? DateTime.Now.Date : programmedDate.Date.Value.Date;
+                ProductServiceClient client =
+                    new ProductServiceClient();
+                int ret = await client.requestOrderAsync(clientId, productId, quantity, selectedDate.Date.ToString("dd/MM/yyyy"), shipperId);
+                if (ret > 0)
+                {
+                    lblSuccess.Visibility = Visibility.Visible;
+                    lblError.Visibility = Visibility.Collapsed;
+                }
+                    
             }
             else
             {
@@ -225,25 +239,36 @@ namespace LocalAppUWP
                 lblError.Visibility = Visibility.Visible;
             }
         }
+
+        private int retrieveID (String txt)
+        {
+            int from = txt.IndexOf("[") + 1;
+            int to = txt.IndexOf("]");
+            return Int32.Parse(txt.Substring(from, to - from));
+        }
+        private String retrieveName (String txt)
+        {
+            int from = txt.IndexOf("]");
+            return txt.Substring(from + 1);
+        }
         //return true if entered data is valid
         private bool checkEnteredData()
         {
             bool valid = true;
             int tmp = 0;
-            valid &= (int.TryParse(quantity.Text, out tmp));
+            valid &= (int.TryParse(quantityInputBox.Text, out tmp));
             valid &= !(selectedClient is null);
             valid &= !(selectedProduct is null);
             valid &= !(selectedShipper is null);
-            valid &= (DateTime.Compare(programmedDate.Date.Value.Date, DateTime.Now) > 0);
-            //valid &= (programmedDate.Date.Value.CompareTo(DateTime.Now.Date) > 0);
+            valid &= ((programmedDate.Date != null) || todayCBox.IsChecked.Value);
             return valid;
         }
 
         private bool shouldAlertUser()
         {
-            if (currentSelectionPlaceholder.Visibility == Visibility.Visible ||
+            if (currentSelectedClientPlaceholder.Visibility == Visibility.Visible ||
                 currentSelectedShipperPlaceholder.Visibility == Visibility.Visible ||
-                !quantity.Text.Equals("") ||
+                !quantityInputBox.Text.Equals("") ||
                 !todayCBox.IsChecked.Value)
             {
                 return true;
@@ -256,9 +281,9 @@ namespace LocalAppUWP
         private void resetPage(String selectedProduct)
         {
             requestTitle.Text = selectedProduct;
-            currentSelectionText.Visibility = Visibility.Collapsed;
-            currentSelectionPlaceholder.Visibility = Visibility.Collapsed;
-            quantity.Text = "";
+            currentSelectedClientText.Visibility = Visibility.Collapsed;
+            currentSelectedClientPlaceholder.Visibility = Visibility.Collapsed;
+            quantityInputBox.Text = "";
             todayCBox.IsChecked = true;
             currentSelectedShipperText.Visibility = Visibility.Collapsed;
             currentSelectedShipperPlaceholder.Visibility = Visibility.Collapsed;
