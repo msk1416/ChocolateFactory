@@ -18,7 +18,7 @@ namespace SyncTaskSched
 
                 var dtrig = new DailyTrigger();
                 dtrig.StartBoundary = DateTime.Now;
-                dtrig.Repetition.Interval = TimeSpan.FromHours(4);
+                dtrig.Repetition.Interval = TimeSpan.FromHours(1);
                 td.Triggers.Add(dtrig);
 
                 td.Actions.Add(new ExecAction(EXEPATH));
