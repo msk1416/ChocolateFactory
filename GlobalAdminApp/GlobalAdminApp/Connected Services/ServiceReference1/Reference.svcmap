@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d0400df6-bf39-4fcf-ae7b-e7ff3acfd1f1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="cf677805-5ac9-47c5-bcb4-1563b3983186" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="8e0f2def-046b-47ef-9a7a-d5cf53c0d1d7" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="35324054-bdf4-4111-95bf-84231b338e91" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
+    <MetadataFile FileName="HQService.xsd" MetadataType="Schema" ID="b2e6f5aa-33f4-4443-968f-09ccbf2327e1" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

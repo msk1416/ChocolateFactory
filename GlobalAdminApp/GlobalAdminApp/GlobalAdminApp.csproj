@@ -4,24 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{F41A8E10-4642-4DF1-B376-1D6F26219FFB}</ProjectGuid>
+    <ProjectGuid>{1FA538AB-34ED-42C3-8F67-6807FE64C39B}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LocalAdminApp</RootNamespace>
-    <AssemblyName>LocalAdminApp</AssemblyName>
+    <RootNamespace>GlobalAdminApp</RootNamespace>
+    <AssemblyName>GlobalAdminApp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-<<<<<<< HEAD
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
-=======
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
->>>>>>> 0cdd3d67df8e38b4195c39f594f657926f3fce43
     <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <PackageCertificateKeyFile>LocalAdminApp_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>GlobalAdminApp_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -99,12 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\HQServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\ProductServiceReference\Reference.cs">
+    <Compile Include="Connected Services\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -118,51 +109,38 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Connected Services\HQServiceReference\service.wsdl" />
-    <None Include="Connected Services\HQServiceReference\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\HQServiceReference\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ProductServiceReference\LocalAdminApp.ProductServiceReference.ClientDTO.datasource">
+    <None Include="Connected Services\ServiceReference1\GlobalAdminApp.ServiceReference1.BranchDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ProductServiceReference\LocalAdminApp.ProductServiceReference.OrderDTO.datasource">
+    <None Include="Connected Services\ServiceReference1\GlobalAdminApp.ServiceReference1.OrdersLogDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ProductServiceReference\LocalAdminApp.ProductServiceReference.PendingOrderDTO.datasource">
+    <None Include="Connected Services\ServiceReference1\GlobalAdminApp.ServiceReference1.PendingStockOrderDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ProductServiceReference\LocalAdminApp.ProductServiceReference.ProductDTO.datasource">
+    <None Include="Connected Services\ServiceReference1\GlobalAdminApp.ServiceReference1.ProductStockDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ProductServiceReference\LocalAdminApp.ProductServiceReference.ShipperDTO.datasource">
+    <None Include="Connected Services\ServiceReference1\GlobalAdminApp.ServiceReference1.StockOrderLogDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ProductServiceReference\ProductService.xsd">
+    <None Include="Connected Services\ServiceReference1\HQService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProductServiceReference\service.wsdl" />
-    <None Include="Connected Services\ProductServiceReference\service.xsd">
+    <None Include="Connected Services\ServiceReference1\service.wsdl" />
+    <None Include="Connected Services\ServiceReference1\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProductServiceReference\service1.xsd">
+    <None Include="Connected Services\ServiceReference1\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="LocalAdminApp_TemporaryKey.pfx" />
+    <None Include="GlobalAdminApp_TemporaryKey.pfx" />
     <None Include="Properties\ServiceReferences.Designer.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\HQServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\HQServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\HQServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\ProductServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\ProductServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\ProductServiceReference\Reference.svcmap">
+    <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -187,15 +165,14 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.4.0</Version>
+      <Version>6.0.8</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\HQServiceReference\" />
-    <WCFMetadataStorage Include="Connected Services\ProductServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
