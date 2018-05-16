@@ -524,6 +524,9 @@ namespace UpdateService.HQServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHQService/getStockOrderLogs", ReplyAction="http://tempuri.org/IHQService/getStockOrderLogsResponse")]
         UpdateService.HQServiceReference.StockOrderLogDTO[] getStockOrderLogs();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IHQService/updateBranchStock", ReplyAction="http://tempuri.org/IHQService/updateBranchStockResponse")]
+        void updateBranchStock(int[] productsStock);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -587,6 +590,10 @@ namespace UpdateService.HQServiceReference {
         
         public UpdateService.HQServiceReference.StockOrderLogDTO[] getStockOrderLogs() {
             return base.Channel.getStockOrderLogs();
+        }
+        
+        public void updateBranchStock(int[] productsStock) {
+            base.Channel.updateBranchStock(productsStock);
         }
     }
 }
