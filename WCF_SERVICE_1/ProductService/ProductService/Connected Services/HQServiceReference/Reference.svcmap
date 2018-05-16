@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="de41fbfa-7f62-4d65-97ba-cd3ecd58e395" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fbb67996-a57c-42e9-ae7e-8bc6c625d410" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -21,10 +21,11 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="c881d7e2-fca0-493f-b787-0004eba1839e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="95fe5d95-8cc5-4f4b-9860-8f945fdd58ac" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="56dc9b59-f05d-49ef-a106-e420aff4f4ac" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
-    <MetadataFile FileName="HQService.xsd" MetadataType="Schema" ID="157b7d65-828b-4256-93ed-ac75510f5fd2" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="ab094e89-6928-47ba-b577-a90f4fdcd2ac" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="2c807525-542d-4894-91a2-47f4e4fcff96" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="7f02b561-dfb9-4c7b-b637-76828843484d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
+    <MetadataFile FileName="HQService.xsd" MetadataType="Schema" ID="f1acb27a-4987-4e85-98a7-4e94eed752f1" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="50832d62-5d7a-4d1b-a0f1-d0ba080c7cff" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

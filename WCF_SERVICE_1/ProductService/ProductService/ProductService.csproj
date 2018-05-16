@@ -15,6 +15,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <XsdCodeGenEnabled>True</XsdCodeGenEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -45,6 +48,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
@@ -68,14 +73,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ChocolateUkStoreEntitiesModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DTOs.cs" />
-    <Compile Include="Client.cs">
-      <DependentUpon>ChocolateUkStoreEntitiesModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Connected Services\HQServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="DTOs.cs" />
+    <Compile Include="Client.cs">
+      <DependentUpon>ChocolateUkStoreEntitiesModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IProductService.cs" />
     <Compile Include="Order.cs">
@@ -104,6 +109,9 @@
     <None Include="ChocolateUkStoreEntitiesModel.edmx.diagram">
       <DependentUpon>ChocolateUkStoreEntitiesModel.edmx</DependentUpon>
     </None>
+    <None Include="Connected Services\HQServiceReference\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\HQServiceReference\HQService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -111,6 +119,15 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\HQServiceReference\ProductService.HQServiceReference.OrdersLogDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HQServiceReference\ProductService.HQServiceReference.PendingStockOrderDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HQServiceReference\ProductService.HQServiceReference.ProductStockDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HQServiceReference\ProductService.HQServiceReference.StockOrderLogDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\HQServiceReference\service.wsdl" />
@@ -126,18 +143,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\HQServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\HQServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\HQServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\HQServiceReference\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ChocolateUkStoreEntitiesModel.Context.tt">
@@ -150,6 +156,15 @@
       <DependentUpon>ChocolateUkStoreEntitiesModel.edmx</DependentUpon>
       <LastGenOutput>ChocolateUkStoreEntitiesModel.cs</LastGenOutput>
     </Content>
+    <None Include="Connected Services\HQServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\HQServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\HQServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\HQServiceReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

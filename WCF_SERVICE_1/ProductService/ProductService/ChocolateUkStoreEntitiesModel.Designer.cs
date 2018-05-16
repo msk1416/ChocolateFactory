@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\sergi\Desktop\Politechnika Lodzka\INTERNET APPLICATIONS PROGRAMMING\WCF_SOAP_REST\git\newtry\chocolatefactory\WCF_SERVICE_1\ProductService\ProductService\ChocolateUkStoreEntitiesModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\sergi\Desktop\PL\IAP\git\newtry\chocolatefactory\WCF_SERVICE_1\ProductService\ProductService\ChocolateUkStoreEntitiesModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

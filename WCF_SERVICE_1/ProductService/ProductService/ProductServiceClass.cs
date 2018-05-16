@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-
 namespace ProductService
 {
     //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
@@ -33,6 +32,7 @@ namespace ProductService
                 if (result > 0)
                 {
                     Order o = ctx.Orders.Find(orderId);
+                    
                     HQServiceReference.HQServiceClient client =
                         new HQServiceReference.HQServiceClient();
                     bool logRet =
@@ -267,5 +267,9 @@ namespace ProductService
                 return list;
             }
         }
+
+        
     }
+
+
 }

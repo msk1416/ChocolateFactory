@@ -5,6 +5,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/HQService" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IHQService_requestStockHQ_InputMessage">
@@ -61,6 +62,12 @@
   <wsdl:message name="IHQService_getStockOrderLogs_OutputMessage">
     <wsdl:part name="parameters" element="tns:getStockOrderLogsResponse" />
   </wsdl:message>
+  <wsdl:message name="IHQService_updateBranchStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateBranchStock" />
+  </wsdl:message>
+  <wsdl:message name="IHQService_updateBranchStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateBranchStockResponse" />
+  </wsdl:message>
   <wsdl:portType name="IHQService">
     <wsdl:operation name="requestStockHQ">
       <wsdl:input wsaw:Action="http://tempuri.org/IHQService/requestStockHQ" message="tns:IHQService_requestStockHQ_InputMessage" />
@@ -97,6 +104,10 @@
     <wsdl:operation name="getStockOrderLogs">
       <wsdl:input wsaw:Action="http://tempuri.org/IHQService/getStockOrderLogs" message="tns:IHQService_getStockOrderLogs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IHQService/getStockOrderLogsResponse" message="tns:IHQService_getStockOrderLogs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateBranchStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IHQService/updateBranchStock" message="tns:IHQService_updateBranchStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IHQService/updateBranchStockResponse" message="tns:IHQService_updateBranchStock_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IHQService" type="tns:IHQService">
@@ -175,6 +186,15 @@
     </wsdl:operation>
     <wsdl:operation name="getStockOrderLogs">
       <soap:operation soapAction="http://tempuri.org/IHQService/getStockOrderLogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateBranchStock">
+      <soap:operation soapAction="http://tempuri.org/IHQService/updateBranchStock" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
