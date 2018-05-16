@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UpdateService.HQServiceReference;
 using UpdateService.ProductServiceReference;
-
+using System.Runtime.InteropServices;
 namespace UpdateService
 {
     class Program
