@@ -38,6 +38,9 @@ namespace HQService
 
         [OperationContract]
         List<StockOrderLogDTO> getStockOrderLogs();
+
+        [OperationContract]
+        void updateBranchStock(List<int> productsStock);
         
     }
 

@@ -42,6 +42,7 @@
           <Property Name="ProductName" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="ProductType" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="quantity_uk" Type="int" />
         </EntityType>
         <EntityType Name="StockOrdersLog">
           <Key>
@@ -87,6 +88,7 @@
           <Property Name="ProductName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="ProductType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="quantity_uk" Type="Int32" />
         </EntityType>
         <EntityType Name="OrdersLog">
           <Key>
@@ -144,6 +146,7 @@
           <EntitySetMapping Name="ProductStock">
             <EntityTypeMapping TypeName="ChocolateCoHQModel.ProductStock">
               <MappingFragment StoreEntitySet="ProductStock">
+                <ScalarProperty Name="quantity_uk" ColumnName="quantity_uk" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductType" ColumnName="ProductType" />

@@ -18,5 +18,6 @@ namespace HQService
         public string ProductName { get; set; }
         public string ProductType { get; set; }
         public int quantity { get; set; }
+        public Nullable<int> quantity_uk { get; set; }
     }
 }

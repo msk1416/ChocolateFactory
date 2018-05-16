@@ -228,6 +228,17 @@ namespace HQService
             return ret;
         }
 
-        
+        public void updateBranchStock(List<int> productsStock)
+        {
+            using (ChocolateCoHQEntities1 ctx = new ChocolateCoHQEntities1())
+            {
+                for (int i = 0; i < productsStock.Count; i += 2)
+                {
+                    var p = ctx.ProductStock.Find(productsStock.ElementAt(i));
+                    p.quantity_uk = productsStock.ElementAt(i + 1);
+                }
+                ctx.SaveChanges();
+            }
+        }
     }
 }
