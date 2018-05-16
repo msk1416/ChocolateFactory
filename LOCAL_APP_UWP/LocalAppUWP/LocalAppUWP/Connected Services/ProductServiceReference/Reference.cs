@@ -20,9 +20,13 @@ namespace LocalAppUWP.ProductServiceReference {
     [System.Runtime.Serialization.DataContractAttribute(Name="OrderDTO", Namespace="http://schemas.datacontract.org/2004/07/ProductService")]
     public partial class OrderDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private int AcceptedField;
+        
         private int ClientIDField;
         
         private System.DateTime DateField;
+        
+        private string JustificationField;
         
         private int OrderIDField;
         
@@ -31,6 +35,19 @@ namespace LocalAppUWP.ProductServiceReference {
         private int QuantityField;
         
         private int ShipperIDField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Accepted {
+            get {
+                return this.AcceptedField;
+            }
+            set {
+                if ((this.AcceptedField.Equals(value) != true)) {
+                    this.AcceptedField = value;
+                    this.RaisePropertyChanged("Accepted");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int ClientID {
@@ -54,6 +71,19 @@ namespace LocalAppUWP.ProductServiceReference {
                 if ((this.DateField.Equals(value) != true)) {
                     this.DateField = value;
                     this.RaisePropertyChanged("Date");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Justification {
+            get {
+                return this.JustificationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JustificationField, value) != true)) {
+                    this.JustificationField = value;
+                    this.RaisePropertyChanged("Justification");
                 }
             }
         }
@@ -491,7 +521,7 @@ namespace LocalAppUWP.ProductServiceReference {
         System.Threading.Tasks.Task<bool> acceptOrderAsync(int orderId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/dismissOrder", ReplyAction="http://tempuri.org/IProductService/dismissOrderResponse")]
-        System.Threading.Tasks.Task<bool> dismissOrderAsync(int orderId);
+        System.Threading.Tasks.Task<bool> dismissOrderAsync(int orderId, string justification);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/deliverStock", ReplyAction="http://tempuri.org/IProductService/deliverStockResponse")]
         System.Threading.Tasks.Task<bool> deliverStockAsync(int productId, int quantity);
@@ -504,6 +534,12 @@ namespace LocalAppUWP.ProductServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/getPendingOrders", ReplyAction="http://tempuri.org/IProductService/getPendingOrdersResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<LocalAppUWP.ProductServiceReference.PendingOrderDTO>> getPendingOrdersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/getOrdersByClient", ReplyAction="http://tempuri.org/IProductService/getOrdersByClientResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<LocalAppUWP.ProductServiceReference.OrderDTO>> getOrdersByClientAsync(int clientId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/getPendingOrdersByClient", ReplyAction="http://tempuri.org/IProductService/getPendingOrdersByClientResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<LocalAppUWP.ProductServiceReference.PendingOrderDTO>> getPendingOrdersByClientAsync(int clientId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProductService/getClients", ReplyAction="http://tempuri.org/IProductService/getClientsResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<LocalAppUWP.ProductServiceReference.ClientDTO>> getClientsAsync();
@@ -566,8 +602,8 @@ namespace LocalAppUWP.ProductServiceReference {
             return base.Channel.acceptOrderAsync(orderId);
         }
         
-        public System.Threading.Tasks.Task<bool> dismissOrderAsync(int orderId) {
-            return base.Channel.dismissOrderAsync(orderId);
+        public System.Threading.Tasks.Task<bool> dismissOrderAsync(int orderId, string justification) {
+            return base.Channel.dismissOrderAsync(orderId, justification);
         }
         
         public System.Threading.Tasks.Task<bool> deliverStockAsync(int productId, int quantity) {
@@ -584,6 +620,14 @@ namespace LocalAppUWP.ProductServiceReference {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<LocalAppUWP.ProductServiceReference.PendingOrderDTO>> getPendingOrdersAsync() {
             return base.Channel.getPendingOrdersAsync();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<LocalAppUWP.ProductServiceReference.OrderDTO>> getOrdersByClientAsync(int clientId) {
+            return base.Channel.getOrdersByClientAsync(clientId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<LocalAppUWP.ProductServiceReference.PendingOrderDTO>> getPendingOrdersByClientAsync(int clientId) {
+            return base.Channel.getPendingOrdersByClientAsync(clientId);
         }
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<LocalAppUWP.ProductServiceReference.ClientDTO>> getClientsAsync() {

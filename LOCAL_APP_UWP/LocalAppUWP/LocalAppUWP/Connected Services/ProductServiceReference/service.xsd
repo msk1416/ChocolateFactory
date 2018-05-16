@@ -37,6 +37,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="orderId" type="xs:int" />
+        <xs:element minOccurs="0" name="justification" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -101,6 +102,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getOrdersByClient">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="clientId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getOrdersByClientResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ProductService" minOccurs="0" name="getOrdersByClientResult" nillable="true" type="q3:ArrayOfOrderDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getPendingOrdersByClient">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="clientId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getPendingOrdersByClientResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ProductService" minOccurs="0" name="getPendingOrdersByClientResult" nillable="true" type="q4:ArrayOfPendingOrderDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getClients">
     <xs:complexType>
       <xs:sequence />
@@ -109,7 +138,7 @@
   <xs:element name="getClientsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ProductService" minOccurs="0" name="getClientsResult" nillable="true" type="q3:ArrayOfClientDTO" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ProductService" minOccurs="0" name="getClientsResult" nillable="true" type="q5:ArrayOfClientDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -121,7 +150,7 @@
   <xs:element name="getProductsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ProductService" minOccurs="0" name="getProductsResult" nillable="true" type="q4:ArrayOfProductDTO" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ProductService" minOccurs="0" name="getProductsResult" nillable="true" type="q6:ArrayOfProductDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -133,7 +162,7 @@
   <xs:element name="getShippersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ProductService" minOccurs="0" name="getShippersResult" nillable="true" type="q5:ArrayOfShipperDTO" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ProductService" minOccurs="0" name="getShippersResult" nillable="true" type="q7:ArrayOfShipperDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

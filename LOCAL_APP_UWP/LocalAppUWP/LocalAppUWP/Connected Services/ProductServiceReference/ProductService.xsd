@@ -8,8 +8,10 @@
   <xs:element name="ArrayOfOrderDTO" nillable="true" type="tns:ArrayOfOrderDTO" />
   <xs:complexType name="OrderDTO">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Accepted" type="xs:int" />
       <xs:element minOccurs="0" name="ClientID" type="xs:int" />
       <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Justification" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OrderID" type="xs:int" />
       <xs:element minOccurs="0" name="ProductID" type="xs:int" />
       <xs:element minOccurs="0" name="Quantity" type="xs:int" />

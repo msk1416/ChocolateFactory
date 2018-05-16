@@ -21,5 +21,6 @@ namespace HQService
         public int Quantity { get; set; }
         public int LocalShipperID { get; set; }
         public short Accepted { get; set; }
+        public string Justification { get; set; }
     }
 }

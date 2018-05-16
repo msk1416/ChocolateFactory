@@ -3,72 +3,137 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:LocalAppUWP"
+    xmlns:data="using.LocalAppUWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Width="1440" Height="900">
 
+    
     <SplitView x:Name="productsSplitView" DisplayMode="CompactInline" IsPaneOpen="True"
                CompactPaneLength="50" OpenPaneLength="300">
-
+        
         <SplitView.Pane>
             <StackPanel Background="Transparent" x:Name="ProductsPane" HorizontalAlignment="Stretch" Margin="0,10,0,0">
-                <TextBlock Text="Available products" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <ListView x:Name="productsListView" ItemClick="productsListView_ItemClick" SelectionMode="Single" SelectionChanged="productsListView_SelectionChanged" IsItemClickEnabled="True">
-
-                </ListView>
+                <StackPanel x:Name="productsStackPanel">
+                    <TextBlock Text="Available products" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <ListView x:Name="productsListView" ItemClick="productsListView_ItemClick" SelectionMode="Single" SelectionChanged="productsListView_SelectionChanged" IsItemClickEnabled="True">
+                    </ListView>
+                </StackPanel>
+                <StackPanel x:Name="optionsStackPanel" Orientation="Vertical">
+                    <TextBlock Text="Options" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <ListView x:Name="listViewOptions" ItemClick="listViewOptions_ItemClick" IsItemClickEnabled="True">
+                        <ListViewItem x:Name="ordersOpt">View my orders</ListViewItem>
+                        <ListViewItem x:Name="logoutOpt">Log out</ListViewItem>
+                    </ListView>
+                </StackPanel>
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
             <StackPanel Orientation="Vertical">
-                <TextBlock HorizontalAlignment="Left" Name="requestTitle" FontSize="40" Margin="0,10,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="102" Width="887"/>
-                <StackPanel Orientation="Vertical" x:Name="requestContentStackPanel" Visibility="Collapsed">
-                    <StackPanel x:Name="clientStackPanel" Orientation="Horizontal" Margin="0,10,0,10">
-                        <TextBlock VerticalAlignment="Center" FontSize="24" Text="Select a client: "/>
-                        <Button x:Name="clientDropDown" Click="clientDropDown_Click" FontSize="24" Margin="20,0,0,0">
-                            Select
-                            <Button.Flyout>
-                                <MenuFlyout x:Name="menuFlyoutClients" >
-                                </MenuFlyout>
-                            </Button.Flyout>
-                        </Button>
-                        <TextBlock x:Name="currentSelectionText" VerticalAlignment="Center" FontSize="16" Text="current selection: " Visibility="Collapsed" Foreground="#FF666161"/>
-                        <TextBlock x:Name="currentSelectionPlaceholder" VerticalAlignment="Center" FontSize="24" Margin="20,0,0,0"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" x:Name="quantityStackPanel" Margin="0,10,0,10">
-                        <TextBlock Text="How much of the selected product do you want to order?" FontSize="24" VerticalAlignment="Center"/>
-                        <TextBox InputScope="Number" Name="quantity" TextChanging="quantity_TextChanging" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Name="dateStackPanel" Margin="0,10,0,10">
-                        <RadioButton VerticalAlignment="Center" Name="todayCBox" GroupName="date" IsChecked="True">Today</RadioButton>
+                <StackPanel x:Name="requestStackPanel" Visibility="Visible">
+                    <TextBlock HorizontalAlignment="Left" Name="requestTitle" Padding="0,20,0,0" FontSize="40" Margin="0,10,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="102" Width="887"/>
+                    <StackPanel Orientation="Vertical" x:Name="requestContentStackPanel" Visibility="Collapsed">
 
-                        <RadioButton VerticalAlignment="Center" Name="programDateRB" GroupName="date" Checked="programDateRB_Checked" Unchecked="programDateRB_Unchecked">
-                            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Center" Text="Program the order: "/>
-                                <CalendarDatePicker VerticalAlignment="Center" x:Name="programmedDate" IsEnabled="False" FirstDayOfWeek="Monday" ></CalendarDatePicker>
-                            </StackPanel>
+                        <StackPanel Margin="0,0,0,10">
+                            <TextBlock x:Name="lblLoggedAs" FontSize="26">Logged as ----</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" x:Name="quantityStackPanel" Margin="0,10,0,10">
+                            <TextBlock Text="How much of the selected product do you want to order?" FontSize="24" VerticalAlignment="Center"/>
+                            <TextBox InputScope="Number" Name="quantityInputBox" TextChanging="quantity_TextChanging" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="dateStackPanel" Margin="0,10,0,10">
+                            <RadioButton VerticalAlignment="Center" Name="todayCBox" GroupName="date" IsChecked="True">Today</RadioButton>
 
-                        </RadioButton>
+                            <RadioButton VerticalAlignment="Center" Name="programDateRB" GroupName="date" Checked="programDateRB_Checked" Unchecked="programDateRB_Unchecked">
+                                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="Program the order: "/>
+                                    <CalendarDatePicker VerticalAlignment="Center" x:Name="programmedDate" IsEnabled="False" FirstDayOfWeek="Monday" ></CalendarDatePicker>
+                                </StackPanel>
+
+                            </RadioButton>
+                        </StackPanel>
+                        <StackPanel x:Name="shippersStackPanel" Orientation="Horizontal" Margin="0,10,0,10">
+                            <TextBlock VerticalAlignment="Center" FontSize="24" Text="Select a client: "/>
+                            <Button x:Name="shippersDropDown" Click="shippersDropDown_Click" FontSize="24" Margin="20,0,0,0">
+                                Select
+                                <Button.Flyout>
+                                    <MenuFlyout x:Name="menuFlyoutShippers" >
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                            </Button>
+                            <TextBlock x:Name="currentSelectedShipperText" VerticalAlignment="Center" FontSize="16" Text="current selection: " Visibility="Collapsed" Foreground="#FF666161"/>
+                            <TextBlock x:Name="currentSelectedShipperPlaceholder" VerticalAlignment="Center" FontSize="24" Margin="20,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="btnsStackPanel" Margin="0,10,0,10">
+                            <Button FontSize="30" x:Name="sendReqBtn" Click="SendRequestBtn_Click" Margin="0,0,10,0">Send request</Button>
+                            <Button FontSize="30" Click="ClearFieldsBtn_Click" Margin="10,0,0,0">Clear</Button>
+                        </StackPanel>
+                        <TextBlock x:Name="lblError" VerticalAlignment="Center" FontSize="14" Text="Entered data is not valid, please check your order again." Foreground="Red" Visibility="Collapsed"/>
+                        <TextBlock x:Name="lblSuccess" VerticalAlignment="Center" FontSize="14" Text="Order request was a success, new ID is ----. Feel free to request more products." Foreground="Green" Visibility="Collapsed"/>
                     </StackPanel>
-                    <StackPanel x:Name="shippersStackPanel" Orientation="Horizontal" Margin="0,10,0,10">
-                        <TextBlock VerticalAlignment="Center" FontSize="24" Text="Select a client: "/>
-                        <Button x:Name="shippersDropDown" Click="shippersDropDown_Click" FontSize="24" Margin="20,0,0,0">
-                            Select
-                            <Button.Flyout>
-                                <MenuFlyout x:Name="menuFlyoutShippers" >
-                                </MenuFlyout>
-                            </Button.Flyout>
-                        </Button>
-                        <TextBlock x:Name="currentSelectedShipperText" VerticalAlignment="Center" FontSize="16" Text="current selection: " Visibility="Collapsed" Foreground="#FF666161"/>
-                        <TextBlock x:Name="currentSelectedShipperPlaceholder" VerticalAlignment="Center" FontSize="24" Margin="20,0,0,0"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="btnsStackPanel" Margin="0,10,0,10">
-                        <Button FontSize="30" Click="SendRequestBtn_Click" Margin="0,0,10,0">Send request</Button>
-                        <Button FontSize="30" Click="ClearFieldsBtn_Click" Margin="10,0,0,0">Clear</Button>
-                    </StackPanel>
+                    <TextBlock x:Name="InitialText" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Select a product to start an order" Margin="0,170,0,0" Foreground="Gray" Visibility="Visible"/>
                 </StackPanel>
-                <TextBlock x:Name="InitialText" FontSize="42" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Select a product to start an order" Margin="0,170,0,0" Foreground="Gray" Visibility="Visible"/>
-            </StackPanel>
+                <StackPanel x:Name="optionsWindow" Visibility="Collapsed">
+                    <TextBlock HorizontalAlignment="Left" Name="ordersTitle" Padding="0,20,0,0" FontSize="40" Margin="0,10,0,0" Text="Your orders" TextWrapping="Wrap" VerticalAlignment="Top" Height="102" Width="887"/>
+                    <Button Click="refreshBtn_Click" x:Name="refreshBtn">Refresh</Button>
+                    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="ordersGrid">
+                        <StackPanel Orientation="Vertical">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
 
+                                <TextBlock Grid.Column="0" Text="Order ID" HorizontalAlignment="Center" FontWeight="    Bold"/>
+                                <TextBlock Grid.Column="1" Text="Product" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                <TextBlock Grid.Column="2" Text="Shipper" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                <TextBlock Grid.Column="3" Text="Quantity" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                <TextBlock Grid.Column="4" Text="Date" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                <TextBlock Grid.Column="5" Text="Status" HorizontalAlignment="Center" FontWeight="Bold"/>
+                                <TextBlock Grid.Column="6" Text="Justification (if dismissed)" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            </Grid>
+                            <ScrollViewer Height="530">
+                            <GridView ItemsSource="{x:Bind orders}" IsItemClickEnabled="True" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapGrid Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate  x:DataType="local:PrintableOrder">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="140"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="200"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{x:Bind orderId}" HorizontalAlignment="Center"></TextBlock>
+                                        <TextBlock Grid.Column="1" Text="{x:Bind product}" HorizontalAlignment="Center"></TextBlock>
+                                        <TextBlock Grid.Column="2" Text="{x:Bind shipper}" HorizontalAlignment="Center"></TextBlock>
+                                        <TextBlock Grid.Column="3" Text="{x:Bind quantity}" HorizontalAlignment="Center"></TextBlock>
+                                        <TextBlock Grid.Column="4" Text="{x:Bind date}" HorizontalAlignment="Center"></TextBlock>
+                                        <TextBlock Grid.Column="5" Text="{x:Bind status}" HorizontalAlignment="Center"></TextBlock>
+                                        <TextBlock Grid.Column="6" Text="{x:Bind justification}" HorizontalAlignment="Left"></TextBlock>
+                                    </Grid>
+
+                                </DataTemplate>
+
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        </ScrollViewer>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
         </SplitView.Content>
     </SplitView>
 

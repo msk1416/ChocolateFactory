@@ -36,7 +36,7 @@ namespace ProductService
                     HQServiceReference.HQServiceClient client =
                         new HQServiceReference.HQServiceClient();
                     bool logRet =
-                        client.logLocalOrder(o.OrderID, o.ClientID, o.ProductID, o.Date.ToShortDateString(), o.Quantity, o.ShipperID, true);
+                        client.logLocalOrder(o.OrderID, o.ClientID, o.ProductID, o.Date.ToShortDateString(), o.Quantity, o.ShipperID, true, "");
                     return logRet;
                 } else
                 {
@@ -45,7 +45,24 @@ namespace ProductService
             }
         }
 
-
+        public bool logDismissedLocalOrder(PendingOrder po, string justification)
+        {
+            using (var ctx = new ChocolateStoreUkEntities2())
+            {
+                Order o = new Order();
+                o.OrderID = po.OrderID;
+                o.ClientID = po.ClientID;
+                o.ProductID = po.ProductID;
+                o.Quantity = po.Quantity;
+                o.Date = po.Date;
+                o.ShipperID = po.ShipperID;
+                o.Accepted = 0;
+                o.Justification = justification;
+                ctx.Orders.Add(o);
+                int ret = ctx.SaveChanges();
+                return (ret > 0);
+            }
+        }
 
 
         public bool deliverStock(int productId, int quantity)
@@ -77,7 +94,7 @@ namespace ProductService
             }
         }
 
-        public bool dismissOrder(int orderId)
+        public bool dismissOrder(int orderId, string justification)
         {
             using (var ctx = new ChocolateStoreUkEntities2())
             {
@@ -86,7 +103,8 @@ namespace ProductService
                     new HQServiceReference.HQServiceClient();
                 
                 bool logRet =
-                    client.logLocalOrder(po.OrderID, po.ClientID, po.ProductID, po.Date.ToShortDateString(), po.Quantity, po.ShipperID, false);
+                    client.logLocalOrder(po.OrderID, po.ClientID, po.ProductID, po.Date.ToShortDateString(), po.Quantity, po.ShipperID, false, justification);
+                logDismissedLocalOrder(po, justification);
                 ctx.PendingOrders.Remove(po);
                 int ret = ctx.SaveChanges();
                 return logRet && ret > 0;
@@ -104,6 +122,8 @@ namespace ProductService
             ret.ProductID = o.ProductID;
             ret.Quantity = o.Quantity;
             ret.ShipperID = o.ShipperID;
+            ret.Accepted = o.Accepted;
+            ret.Justification = o.Justification;
             return ret;
         }
 
@@ -215,6 +235,34 @@ namespace ProductService
                 foreach (Shipper s in shippers)
                 {
                     list.Add(DTO(s));
+                }
+                return list;
+            }
+        }
+
+        public List<OrderDTO> getOrdersByClient(int clientId)
+        {
+            List<OrderDTO> list = new List<OrderDTO>();
+            using (var ctx = new ChocolateStoreUkEntities2())
+            {
+                IEnumerable<Order> orders = ctx.Orders.Where(o => o.ClientID == clientId);
+                foreach (Order o in orders)
+                {
+                    list.Add(DTO(o));
+                }
+                return list;
+            }
+        }
+
+        public List<PendingOrderDTO> getPendingOrdersByClient(int clientId)
+        {
+            List<PendingOrderDTO> list = new List<PendingOrderDTO>();
+            using (var ctx = new ChocolateStoreUkEntities2())
+            {
+                IEnumerable<PendingOrder> orders = ctx.PendingOrders.Where(o => o.ClientID == clientId);
+                foreach (PendingOrder po in orders)
+                {
+                    list.Add(DTO(po));
                 }
                 return list;
             }

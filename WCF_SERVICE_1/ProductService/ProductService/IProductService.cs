@@ -19,7 +19,7 @@ namespace ProductService
         bool acceptOrder(int orderId);
 
         [OperationContract]
-        bool dismissOrder(int orderId);
+        bool dismissOrder(int orderId, string justification);
 
         [OperationContract]
         bool deliverStock(int productId, int quantity);
@@ -32,6 +32,12 @@ namespace ProductService
 
         [OperationContract]
         List<PendingOrderDTO> getPendingOrders();
+
+        [OperationContract]
+        List<OrderDTO> getOrdersByClient(int clientId);
+
+        [OperationContract]
+        List<PendingOrderDTO> getPendingOrdersByClient(int clientId);
 
         [OperationContract]
         List<ClientDTO> getClients();

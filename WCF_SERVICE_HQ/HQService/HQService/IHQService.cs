@@ -19,7 +19,7 @@ namespace HQService
         int acceptStockRequest(int orderId);
 
         [OperationContract]
-        bool logLocalOrder(int orderId, int localClientId, int productId, String date, int quantity, int localShipperId, bool isAccepted);
+        bool logLocalOrder(int orderId, int localClientId, int productId, String date, int quantity, int localShipperId, bool isAccepted, string justification);
 
         [OperationContract]
         bool dismissStockOrder(int orderId);

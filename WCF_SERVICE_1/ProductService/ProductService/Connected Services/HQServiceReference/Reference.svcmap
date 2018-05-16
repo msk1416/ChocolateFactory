@@ -24,6 +24,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="c881d7e2-fca0-493f-b787-0004eba1839e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="95fe5d95-8cc5-4f4b-9860-8f945fdd58ac" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="56dc9b59-f05d-49ef-a106-e420aff4f4ac" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
+    <MetadataFile FileName="HQService.xsd" MetadataType="Schema" ID="157b7d65-828b-4256-93ed-ac75510f5fd2" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/HQService/HQServiceClass/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

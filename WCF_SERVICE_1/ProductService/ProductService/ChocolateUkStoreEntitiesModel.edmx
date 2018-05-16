@@ -24,6 +24,8 @@
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="ShipperID" Type="int" Nullable="false" />
+          <Property Name="Accepted" Type="tinyint" Nullable="false" />
+          <Property Name="Justification" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="PendingOrders">
           <Key>
@@ -55,6 +57,8 @@
           <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="City" Type="nchar" MaxLength="10" />
           <Property Name="CostPerTon" Type="int" Nullable="false" />
+          <Property Name="Accepted" Type="tinyint" Nullable="false" />
+          <Property Name="Justification" Type="varchar" MaxLength="200" />
         </EntityType>
         <Association Name="FK_Orders_Clients">
           <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
@@ -88,7 +92,43 @@
               <PropertyRef Name="ShipperID" />
             </Principal>
             <Dependent Role="Orders">
+              <PropertyRef Name="ShipperID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PendingOrders_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="PendingOrders" Type="Self.PendingOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="PendingOrders">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PendingOrders_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="PendingOrders" Type="Self.PendingOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
               <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="PendingOrders">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PendingOrders_Shippers">
+          <End Role="Shippers" Type="Self.Shippers" Multiplicity="1" />
+          <End Role="PendingOrders" Type="Self.PendingOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippers">
+              <PropertyRef Name="ShipperID" />
+            </Principal>
+            <Dependent Role="PendingOrders">
+              <PropertyRef Name="ShipperID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -120,6 +160,18 @@
             <End Role="Shippers" EntitySet="Shippers" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
+          <AssociationSet Name="FK_PendingOrders_Clients" Association="Self.FK_PendingOrders_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="PendingOrders" EntitySet="PendingOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PendingOrders_Products" Association="Self.FK_PendingOrders_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="PendingOrders" EntitySet="PendingOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PendingOrders_Shippers" Association="Self.FK_PendingOrders_Shippers">
+            <End Role="Shippers" EntitySet="Shippers" />
+            <End Role="PendingOrders" EntitySet="PendingOrders" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -134,6 +186,7 @@
           <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="PreferedFormat" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Clients" FromRole="Clients" ToRole="Orders" />
+          <NavigationProperty Name="PendingOrders" Relationship="ChocolateStoreUkModel.FK_PendingOrders_Clients" FromRole="Client" ToRole="PendingOrder" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -148,6 +201,9 @@
           <NavigationProperty Name="Client" Relationship="Self.FK_Orders_Clients" FromRole="Orders" ToRole="Clients" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Orders_Products" FromRole="Orders" ToRole="Products" />
           <NavigationProperty Name="Shipper" Relationship="Self.FK_Orders_Shippers" FromRole="Orders" ToRole="Shippers" />
+          <Property Name="Accepted" Type="Byte" Nullable="false" />
+          <Property Name="Justification" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Shipper1" Relationship="ChocolateStoreUkModel.FK_Orders_Shippers1" FromRole="Order" ToRole="Shipper" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -160,6 +216,7 @@
           <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="Cost" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Products" FromRole="Products" ToRole="Orders" />
+          <NavigationProperty Name="PendingOrders" Relationship="ChocolateStoreUkModel.FK_PendingOrders_Products" FromRole="Product" ToRole="PendingOrder" />
         </EntityType>
         <EntityType Name="Shipper">
           <Key>
@@ -170,6 +227,10 @@
           <Property Name="City" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="CostPerTon" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Shippers" FromRole="Shippers" ToRole="Orders" />
+          <Property Name="Accepted" Type="Byte" Nullable="false" />
+          <Property Name="Justification" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders1" Relationship="ChocolateStoreUkModel.FK_Orders_Shippers1" FromRole="Shipper" ToRole="Order" />
+          <NavigationProperty Name="PendingOrders" Relationship="ChocolateStoreUkModel.FK_PendingOrders_Shippers" FromRole="Shipper" ToRole="PendingOrder" />
         </EntityType>
         <EntityType Name="PendingOrder">
           <Key>
@@ -181,6 +242,9 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ShipperID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="ChocolateStoreUkModel.FK_PendingOrders_Clients" FromRole="PendingOrder" ToRole="Client" />
+          <NavigationProperty Name="Product" Relationship="ChocolateStoreUkModel.FK_PendingOrders_Products" FromRole="PendingOrder" ToRole="Product" />
+          <NavigationProperty Name="Shipper" Relationship="ChocolateStoreUkModel.FK_PendingOrders_Shippers" FromRole="PendingOrder" ToRole="Shipper" />
         </EntityType>
         <Association Name="FK_Orders_Clients">
           <End Role="Clients" Type="Self.Client" Multiplicity="1" />
@@ -246,7 +310,71 @@
             <Parameter Name="Date" Mode="In" Type="DateTime" />
             <Parameter Name="ShipperID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_PendingOrders_Clients" Association="ChocolateStoreUkModel.FK_PendingOrders_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="PendingOrder" EntitySet="PendingOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Shippers1" Association="ChocolateStoreUkModel.FK_Orders_Shippers1">
+            <End Role="Shipper" EntitySet="Shippers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PendingOrders_Products" Association="ChocolateStoreUkModel.FK_PendingOrders_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="PendingOrder" EntitySet="PendingOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PendingOrders_Shippers" Association="ChocolateStoreUkModel.FK_PendingOrders_Shippers">
+            <End Role="Shipper" EntitySet="Shippers" />
+            <End Role="PendingOrder" EntitySet="PendingOrders" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_PendingOrders_Clients">
+          <End Type="ChocolateStoreUkModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="ChocolateStoreUkModel.PendingOrder" Role="PendingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="PendingOrder">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Shippers1">
+          <End Type="ChocolateStoreUkModel.Shipper" Role="Shipper" Multiplicity="1" />
+          <End Type="ChocolateStoreUkModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipper">
+              <PropertyRef Name="ShipperID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ShipperID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PendingOrders_Products">
+          <End Type="ChocolateStoreUkModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="ChocolateStoreUkModel.PendingOrder" Role="PendingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="PendingOrder">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PendingOrders_Shippers">
+          <End Type="ChocolateStoreUkModel.Shipper" Role="Shipper" Multiplicity="1" />
+          <End Type="ChocolateStoreUkModel.PendingOrder" Role="PendingOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipper">
+              <PropertyRef Name="ShipperID" />
+            </Principal>
+            <Dependent Role="PendingOrder">
+              <PropertyRef Name="ShipperID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -266,6 +394,8 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="ChocolateStoreUkModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Justification" ColumnName="Justification" />
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
@@ -290,6 +420,8 @@
           <EntitySetMapping Name="Shippers">
             <EntityTypeMapping TypeName="ChocolateStoreUkModel.Shipper">
               <MappingFragment StoreEntitySet="Shippers">
+                <ScalarProperty Name="Justification" ColumnName="Justification" />
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
                 <ScalarProperty Name="ShipperID" ColumnName="ShipperID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="City" ColumnName="City" />
