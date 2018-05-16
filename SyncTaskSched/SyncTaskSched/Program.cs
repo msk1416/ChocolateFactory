@@ -8,7 +8,9 @@ namespace SyncTaskSched
 {
     class Program
     {
-        private static String EXEPATH = "C:\\Users\\sergi\\Desktop\\Politechnika Lodzka\\INTERNET APPLICATIONS PROGRAMMING\\WCF_SOAP_REST\\git\\newtry\\chocolatefactory\\UpdateService\\UpdateService\\bin\\Release\\UpdateService.exe";
+        private static String EXEPATH = "C:\\Users\\sergi\\Desktop\\PL\\IAP\\" +
+            "WCF_SOAP_REST\\git\\newtry\\chocolatefactory\\UpdateService\\UpdateService\\" +
+            "bin\\Release\\UpdateService.exe";
         static void Main(string[] args)
         {
             using (TaskService ts = new TaskService())
