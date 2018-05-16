@@ -36,7 +36,7 @@ namespace LocalAppUWP
         String selectedShipper;
         int prevSelected = -1;
         int indexSelected = -1;
-        bool needUpdateOrders = false;
+        bool uselessVar = false;
         ObservableCollection<int> containedOrderIds = new ObservableCollection<int>();
         private string defaultLblSuccessText = "Order request was a success, new ID is ---- . Feel free to request more products.";
         public RequestPage()
