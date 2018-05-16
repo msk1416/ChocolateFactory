@@ -72,6 +72,8 @@ namespace ProductService
         public int Price { get; set; }
         [DataMember]
         public int Cost { get; set; }
+        [DataMember]
+        public int Quantity_UK { get; set; }
     }
 
     [DataContract]

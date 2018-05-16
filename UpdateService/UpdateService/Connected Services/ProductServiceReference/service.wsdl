@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ProductServiceClass" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ProductService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IProductService_requestOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:requestOrder" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_requestOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:requestOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_acceptOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:acceptOrder" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_acceptOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:acceptOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_dismissOrder_InputMessage">
+    <wsdl:part name="parameters" element="tns:dismissOrder" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_dismissOrder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:dismissOrderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_deliverStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:deliverStock" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_deliverStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:deliverStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_requestStockToHQ_InputMessage">
+    <wsdl:part name="parameters" element="tns:requestStockToHQ" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_requestStockToHQ_OutputMessage">
+    <wsdl:part name="parameters" element="tns:requestStockToHQResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:getOrders" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getPendingOrders_InputMessage">
+    <wsdl:part name="parameters" element="tns:getPendingOrders" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getPendingOrders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getPendingOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getOrdersByClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:getOrdersByClient" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getOrdersByClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getOrdersByClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getPendingOrdersByClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:getPendingOrdersByClient" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getPendingOrdersByClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getPendingOrdersByClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getClients_InputMessage">
+    <wsdl:part name="parameters" element="tns:getClients" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getClients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getClientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:getProducts" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getShippers_InputMessage">
+    <wsdl:part name="parameters" element="tns:getShippers" />
+  </wsdl:message>
+  <wsdl:message name="IProductService_getShippers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getShippersResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IProductService">
+    <wsdl:operation name="requestOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/requestOrder" message="tns:IProductService_requestOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/requestOrderResponse" message="tns:IProductService_requestOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="acceptOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/acceptOrder" message="tns:IProductService_acceptOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/acceptOrderResponse" message="tns:IProductService_acceptOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="dismissOrder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/dismissOrder" message="tns:IProductService_dismissOrder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/dismissOrderResponse" message="tns:IProductService_dismissOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="deliverStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/deliverStock" message="tns:IProductService_deliverStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/deliverStockResponse" message="tns:IProductService_deliverStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="requestStockToHQ">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/requestStockToHQ" message="tns:IProductService_requestStockToHQ_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/requestStockToHQResponse" message="tns:IProductService_requestStockToHQ_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getOrders" message="tns:IProductService_getOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getOrdersResponse" message="tns:IProductService_getOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getPendingOrders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getPendingOrders" message="tns:IProductService_getPendingOrders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getPendingOrdersResponse" message="tns:IProductService_getPendingOrders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getOrdersByClient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getOrdersByClient" message="tns:IProductService_getOrdersByClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getOrdersByClientResponse" message="tns:IProductService_getOrdersByClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getPendingOrdersByClient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getPendingOrdersByClient" message="tns:IProductService_getPendingOrdersByClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getPendingOrdersByClientResponse" message="tns:IProductService_getPendingOrdersByClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getClients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getClients" message="tns:IProductService_getClients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getClientsResponse" message="tns:IProductService_getClients_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getProducts" message="tns:IProductService_getProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getProductsResponse" message="tns:IProductService_getProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getShippers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProductService/getShippers" message="tns:IProductService_getShippers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProductService/getShippersResponse" message="tns:IProductService_getShippers_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IProductService" type="tns:IProductService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="requestOrder">
+      <soap:operation soapAction="http://tempuri.org/IProductService/requestOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="acceptOrder">
+      <soap:operation soapAction="http://tempuri.org/IProductService/acceptOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dismissOrder">
+      <soap:operation soapAction="http://tempuri.org/IProductService/dismissOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deliverStock">
+      <soap:operation soapAction="http://tempuri.org/IProductService/deliverStock" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="requestStockToHQ">
+      <soap:operation soapAction="http://tempuri.org/IProductService/requestStockToHQ" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrders">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPendingOrders">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getPendingOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getOrdersByClient">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getOrdersByClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPendingOrdersByClient">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getPendingOrdersByClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getClients">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getClients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProducts">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getShippers">
+      <soap:operation soapAction="http://tempuri.org/IProductService/getShippers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProductServiceClass">
+    <wsdl:port name="BasicHttpBinding_IProductService" binding="tns:BasicHttpBinding_IProductService">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/ProductService/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
