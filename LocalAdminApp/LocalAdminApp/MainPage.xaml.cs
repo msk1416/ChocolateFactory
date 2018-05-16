@@ -33,7 +33,6 @@ namespace LocalAdminApp
             
         }
 
-<<<<<<< HEAD
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             ProductServiceClient client
@@ -56,16 +55,10 @@ namespace LocalAdminApp
 
 
             await client.CloseAsync();
-=======
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
->>>>>>> 0cdd3d67df8e38b4195c39f594f657926f3fce43
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-<<<<<<< HEAD
             
         }
 
@@ -96,32 +89,6 @@ namespace LocalAdminApp
                 PendingOrdersListView.Items.Add(p.OrderID + " Client " + clientsList[p.ProductID] + " product " + productsList[p.ProductID] + " quantity " + p.Quantity);
             }
             await client.CloseAsync();
-=======
-
-        }
-
-        private async Task RefreshPendingOrders_Click(object sender, RoutedEventArgs e)
-        {
-
-            //Task<ObservableCollection<PendingOrderDTO>> pendingOrders = client.getPendingOrdersAsync();
-           
-            try
-            {
-                // PendingOrdersListView.Items.Add(pendingOrders.Result);
-                
-                ObservableCollection<PendingOrderDTO> pendingOrdersContainer = await client.getPendingOrdersAsync();
-                
-                
-                foreach (var newValue in pendingOrdersContainer)
-                    PendingOrdersListView.Items.Add(newValue);
-
-            }
-            catch (Exception exception)
-            {
-
-                throw;
-            }
->>>>>>> 0cdd3d67df8e38b4195c39f594f657926f3fce43
 
         }
     }

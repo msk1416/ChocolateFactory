@@ -8,7 +8,6 @@
     mc:Ignorable="d" Height="544" Width="921">
 
     <Grid Background="{ThemeResource ButtonDisabledBackgroundThemeBrush}" Margin="10,0,0,0">
-<<<<<<< HEAD
         <Button x:Name="AcceptOrderButton" Content="Accept Order" HorizontalAlignment="Left" Margin="608,68,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <ListView x:Name="PendingOrdersListView" HorizontalAlignment="Left" Height="204" Margin="27,68,0,0" VerticalAlignment="Top" Width="515" SelectionChanged="ListView_SelectionChanged"/>
         <ListView HorizontalAlignment="Left" Height="201" Margin="27,333,0,0" VerticalAlignment="Top" Width="515"/>
@@ -19,18 +18,6 @@
         <TextBox x:Name="ResourcesTextBox" HorizontalAlignment="Left" Margin="609,333,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="224"/>
         <Button x:Name="OrderResourceButton" Content="Order resource" HorizontalAlignment="Left" Margin="609,370,0,0" VerticalAlignment="Top" Width="128"/>
         <Button x:Name="RefreshPendingOrders" Content="Refresh orders" HorizontalAlignment="Left" Margin="608,190,0,0" VerticalAlignment="Top" Click="RefreshPendingOrders_Click"/>
-=======
-        <Button x:Name="AcceptOrderButton" Content="Accept Order" HorizontalAlignment="Left" Margin="63,434,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <ListView x:Name="PendingOrdersListView" HorizontalAlignment="Left" Height="300" Margin="63,68,0,0" VerticalAlignment="Top" Width="224" SelectionChanged="ListView_SelectionChanged"/>
-        <ListView HorizontalAlignment="Left" Height="306" Margin="629,62,0,0" VerticalAlignment="Top" Width="227"/>
-        <TextBlock x:Name="Resources" HorizontalAlignment="Left" Margin="629,21,0,0" TextWrapping="Wrap" Text="Resources" VerticalAlignment="Top" FontSize="20"/>
-        <TextBlock HorizontalAlignment="Left" Margin="63,21,0,0" TextWrapping="Wrap" Text="Pending Orders" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox x:Name="PendingOrdersTextBox" HorizontalAlignment="Left" Margin="63,373,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="224"/>
-        <Button x:Name="DeclineOrderButton" Content="Decline order" HorizontalAlignment="Left" Margin="63,484,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ResourcesTextBox" HorizontalAlignment="Left" Margin="629,373,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="227"/>
-        <Button x:Name="OrderResourceButton" Content="Order resource" HorizontalAlignment="Left" Margin="629,434,0,0" VerticalAlignment="Top" Width="128"/>
-        <Button x:Name="RefreshPendingOrders" Content="Refresh orders" HorizontalAlignment="Left" Margin="325,68,0,0" VerticalAlignment="Top" Click="RefreshPendingOrders_Click"/>
->>>>>>> 0cdd3d67df8e38b4195c39f594f657926f3fce43
 
     </Grid>
 </Page>
