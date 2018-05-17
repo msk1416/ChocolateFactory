@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="33f1d22bbc30499e90148f1eb76055e1" Name="Diagram1">
+      <Diagram DiagramId="33f1d22bbc30499e90148f1eb76055e1" Name="Diagram1" ZoomLevel="98">
         <EntityTypeShape EntityType="ChocolateCoHQModel.Branches" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateCoHQModel.PendingStockOrders" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateCoHQModel.ProductStock" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateCoHQModel.OrdersLog" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ChocolateCoHQModel.StockOrdersLog" Width="1.5" PointX="5" PointY="0.75" />
+        <EntityTypeShape EntityType="ChocolateCoHQModel.PendingStockOrders" Width="1.5" PointX="2.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChocolateCoHQModel.ProductStock" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChocolateCoHQModel.OrdersLog" Width="1.5" PointX="2.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChocolateCoHQModel.StockOrdersLog" Width="1.5" PointX="4.25" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
