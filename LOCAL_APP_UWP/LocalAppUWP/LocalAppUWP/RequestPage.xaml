@@ -39,7 +39,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" x:Name="quantityStackPanel" Margin="0,10,0,10">
                             <TextBlock Text="How much of the selected product do you want to order?" FontSize="24" VerticalAlignment="Center"/>
-                            <TextBox InputScope="Number" Name="quantityInputBox" TextChanging="quantity_TextChanging" />
+                            <TextBox InputScope="Number" Name="quantityInputBox" MaxLength="4" TextChanging="quantity_TextChanging" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Name="dateStackPanel" Margin="0,10,0,10">
                             <RadioButton VerticalAlignment="Center" Name="todayCBox" GroupName="date" IsChecked="True">Today</RadioButton>
@@ -53,7 +53,7 @@
                             </RadioButton>
                         </StackPanel>
                         <StackPanel x:Name="shippersStackPanel" Orientation="Horizontal" Margin="0,10,0,10">
-                            <TextBlock VerticalAlignment="Center" FontSize="24" Text="Select a client: "/>
+                            <TextBlock VerticalAlignment="Center" FontSize="24" Text="Select a shipper: "/>
                             <Button x:Name="shippersDropDown" Click="shippersDropDown_Click" FontSize="24" Margin="20,0,0,0">
                                 Select
                                 <Button.Flyout>

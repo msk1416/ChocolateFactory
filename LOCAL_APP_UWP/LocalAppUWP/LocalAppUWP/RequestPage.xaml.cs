@@ -36,7 +36,6 @@ namespace LocalAppUWP
         String selectedShipper;
         int prevSelected = -1;
         int indexSelected = -1;
-        bool uselessVar = false;
         ObservableCollection<int> containedOrderIds = new ObservableCollection<int>();
         private string defaultLblSuccessText = "Order request was a success, new ID is ---- . Feel free to request more products.";
         public RequestPage()
@@ -297,7 +296,6 @@ namespace LocalAppUWP
                     po.Date = selectedDate.Date;
                     po.ClientID = loggedClientId;
                     orders.Add(new PrintableOrder(po, getProductNameById(productId), getShipperNameById(shipperId)));
-                    needUpdateOrders = true;
                 }
                     
             }
@@ -325,6 +323,7 @@ namespace LocalAppUWP
             bool valid = true;
             int tmp = 0;
             valid &= (int.TryParse(quantityInputBox.Text, out tmp));
+            valid &= (tmp > 0 && tmp <= 5000);
             valid &= !(loggedClientName is null);
             valid &= !(selectedProduct is null);
             valid &= !(selectedShipper is null);
@@ -347,7 +346,7 @@ namespace LocalAppUWP
 
         private void resetPage(String selectedProduct)
         {
-            requestTitle.Text = selectedProduct;
+            requestTitle.Text = retrieveName(selectedProduct);
             /*currentSelectedClientText.Visibility = Visibility.Collapsed;
             currentSelectedClientPlaceholder.Visibility = Visibility.Collapsed;*/
             quantityInputBox.Text = "";
