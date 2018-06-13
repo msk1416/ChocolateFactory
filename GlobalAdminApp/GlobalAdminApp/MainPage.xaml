@@ -5,17 +5,18 @@
     xmlns:local="using:GlobalAdminApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Height="600" Width="819">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,306,160">
-        <Button x:Name="RefreshOrdersButton" Content="Refresh Orders" HorizontalAlignment="Left" Margin="253,422,0,0" VerticalAlignment="Top" Click="RefreshOrders_Click"/>
-        <ListView x:Name="pendingOrdersListView" HorizontalAlignment="Left" Height="287" Margin="98,114,0,0" VerticalAlignment="Top" Width="483"/>
-        <ListView HorizontalAlignment="Left" Height="100" Margin="551,131,0,0" VerticalAlignment="Top" Width="100"/>
-        <ListView x:Name="StockOrdersListView" HorizontalAlignment="Left" Height="287" Margin="651,114,0,0" VerticalAlignment="Top" Width="483"/>
-        <Button x:Name="AcceptStockRequestButton" Content="Accept Stock Request" HorizontalAlignment="Left" Margin="229,530,0,0" VerticalAlignment="Top" Width="168" Click="AcceptStockRequestButton_Click" />
-        <Button x:Name="DismissStockRequestButton" Content="Dismiss Stock Request" HorizontalAlignment="Left" Margin="229,584,0,0" VerticalAlignment="Top" Width="168"/>
-        <TextBlock x:Name="PendingOrdersTextBlock" HorizontalAlignment="Left" Margin="253,53,0,0" Text="Pending Orders" TextWrapping="Wrap" VerticalAlignment="Top" />
-        <TextBlock x:Name="StockOrdersTextBlock" HorizontalAlignment="Left" Margin="813,57,0,0" Text="Stock Orders" TextWrapping="Wrap" VerticalAlignment="Top" Width="102" Height="27" />
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="-68,0,-84,10">
+        <Button x:Name="RefreshOrdersButton" Content="Refresh Orders" HorizontalAlignment="Left" Margin="595,203,0,0" VerticalAlignment="Top" Click="RefreshOrders_Click"/>
+        <ListView x:Name="pendingOrdersListView" HorizontalAlignment="Left" Height="224" Margin="10,87,0,0" VerticalAlignment="Top" Width="438"/>
+        <Button x:Name="AcceptStockRequestButton" Content="Accept Stock Request" HorizontalAlignment="Left" Margin="471,87,0,0" VerticalAlignment="Top" Width="168" Click="AcceptStockRequestButton_Click" />
+        <Button x:Name="DismissStockRequestButton" Content="Dismiss Stock Request" HorizontalAlignment="Left" Margin="667,87,0,0" VerticalAlignment="Top" Width="168" Click="DismissStockRequestButton_Click"/>
+        <TextBlock x:Name="PendingOrdersTextBlock" HorizontalAlignment="Left" Margin="75,31,0,0" Text="Pending Orders" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" />
+        <TextBlock x:Name="HQStockTextBlock" HorizontalAlignment="Left" Margin="75,325,0,0" Text="Headquarters Stock" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" />
+        <ListView x:Name="StockListView" HorizontalAlignment="Left" Height="233" Margin="10,357,0,0" VerticalAlignment="Top" Width="438"/>
+        <Button x:Name="RefreshStockButton" Content="Refresh Stock" HorizontalAlignment="Left" Margin="595,440,0,0" VerticalAlignment="Top" Width="118" Click="RefreshStockButton_Click"/>
+        <TextBlock x:Name="PendingOrdersTextBlock2" HorizontalAlignment="Left" Margin="623,150,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
